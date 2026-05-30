@@ -1,4 +1,4 @@
-# 🛡️ AI-Augmented SOC Lab: ISO 27001/27005 Aligned
+<img width="1819" height="509" alt="image" src="https://github.com/user-attachments/assets/da8e51f5-1fdd-4b3a-972a-0a26eff6b61f" /># 🛡️ AI-Augmented SOC Lab: ISO 27001/27005 Aligned
 
 > **Design and Implementation of an Automated Security Operations Center**
 
@@ -141,37 +141,7 @@ The [Incident Response Information System (IRIS)](https://docs.dfir-iris.org/lat
 
 The comprehensive automated playbook sequence (`Wazuh-Optimal-Workflow`) systematically sanitizes and enriches raw indicators through eleven stages:
 
-```text
-[Wazuh SIEM Server] ──(Level 5+ Alert via shuffle.py)──> [Node 1: n8n Webhook]
-                                                                  │
-                                                                  ▼
-                                                      [Node 2: Extract Indicators]
-                                                      (Normalize & Deduplicate Cache)
-                                                                  │
-                                           ┌──────────────────────┴──────────────────────┐
-                                           ▼ (Has IP?)                                   ▼ (Has Hash?)
-                                    [Node 3: IF True]                             [Node 4: IF True]
-                                           │                                             │
-                                           ▼                                             ▼
-                                  [Node 5: AbuseIPDB]                           [Node 6: VirusTotal]
-                                           │                                             │
-                                           └──────────────────────┬──────────────────────┘
-                                                                  │
-                                                                  ▼
-                                                       [Node 7: Converge No-Op]
-                                                                  │
-                                                                  ▼
-                                                       [Node 8: Groq AI Triage]
-                                                                  │
-                                                                  ▼
-                                                      [Node 9: IRIS Case Creator]
-                                                                  │
-                                                                  ▼
-                                                      [Node 10: Is Level >= 10?]
-                                                                  │
-                                                                  ├─► [TRUE] ──► [Node 11: Telegram Notification]
-                                                                  └─► [FALSE] ──► (End Pipeline)
-```
+![workflow.png](/screenshots/workflow.png)
 
 ### 4.1 Step-by-Step Node Mechanics
 
