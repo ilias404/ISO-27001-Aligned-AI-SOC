@@ -53,14 +53,14 @@ The laboratory infrastructure is virtualized via VirtualBox and split into three
 * **SOC Zone:** Hosts defensive infrastructure nodes including the Wazuh SIEM instance, n8n SOAR playbooks, Groq AI analytics integration, and the IRIS incident platform.
 
 ### 2.2 Network Design
-All nodes interface across a host-isolated VirtualBox NAT Network subnet (`192.168.1.0/24`) to permit secure lateral log forwarding and simulation traffic without exposing production host systems.
+All nodes interface across a host-isolated VirtualBox NAT Network subnet (`192.168.1.0/24`) to permit secure lateral log forwarding and simulation traffic without exposing production host systems. A secondary Host-Only adapter (`192.168.56.0/24`) is used to allow easy access to web services (n8n, IRIS) from the physical host's browser while keeping simulated attack traffic completely isolated inside the NAT network.
 
-| Virtual Machine | Operating System | IP Address | Infrastructure Role |
-| :--- | :--- | :--- | :--- |
-| **Wazuh** | Amazon Linux (OVA) | `192.168.1.3` | Core SIEM / Analytics Server |
-| **Ubuntu SOC** | Ubuntu 22.04 LTS | `192.168.1.4` | SOAR Pipeline (n8n) + DFIR (IRIS) |
-| **Windows 10** | Windows 10 Pro | `192.168.1.5` | Monitored Victim Endpoint |
-| **Kali Linux** | Kali Linux | `192.168.1.6` | Attack Simulation Node |
+| Virtual Machine | Operating System | NAT Network IP | Host-Only IP | Infrastructure Role |
+| :--- | :--- | :--- | :--- | :--- |
+| **Wazuh** | Amazon Linux (OVA) | `192.168.1.3` | *N/A* | Core SIEM / Analytics Server |
+| **Ubuntu SOC** | Ubuntu 22.04 LTS | `192.168.1.4` | `192.168.56.20` | SOAR Pipeline (n8n) + DFIR (IRIS) |
+| **Windows 10** | Windows 10 Pro | `192.168.1.5` | `192.168.56.10` | Monitored Victim Endpoint |
+| **Kali Linux** | Kali Linux | `192.168.1.6` | *N/A* | Attack Simulation Node |
 
 ### 2.3 Comprehensive Data Flow Architecture
 
