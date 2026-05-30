@@ -38,7 +38,7 @@ This project was carried out as part of the Final Year Project (PFA). The object
 * **Real-Time Visibility:** Implement deep, real-time threat detection using Wazuh SIEM and Sysmon.
 * **AI Integration Layer:** Integrate Groq LLaMA 3.1 to achieve rapid, automated alert analysis.
 * **SOAR Orchestration:** Automate incident response processing via an n8n pipeline.
-* **Incident Management:** Dynamically provision structured incident cases within the IRIS DFIR.
+* **Incident Management:** Dynamically provision structured incident cases within IRIS DFIR.
 * **Context Enrichment:** Automatically enrich indicators using external threat intelligence platforms (AbuseIPDB, VirusTotal).
 * **Compliance Alignment:** Formally map the defensive architecture to ISO 27001 Annex A controls and the ISO 27005 risk management framework.
 
@@ -63,7 +63,7 @@ All nodes interface across a host-isolated VirtualBox NAT Network subnet (`192.1
 | **Wazuh** | Amazon Linux (OVA) | `192.168.1.3` | Core SIEM / Analytics Server |
 | **Ubuntu SOC** | Ubuntu 22.04 LTS | `192.168.1.4` | SOAR Pipeline (n8n) + DFIR (IRIS) |
 | **Windows 10** | Windows 10 Pro | `192.168.1.5` | Monitored Victim Endpoint |
-| **Kali Linux** | Kali Linux | `192.168.1.x` | Attack Simulation Node |
+| **Kali Linux** | Kali Linux | `192.168.1.6` | Attack Simulation Node |
 
 ### 2.3 Comprehensive Data Flow Architecture
 
@@ -345,7 +345,7 @@ This lab is built to support compliance frameworks by acting as a technical cont
 Follow this step-by-step setup guide to provision the complete security operations center laboratory topology.
 
 ### 7.1 SIEM Infrastructure Deployment
-1. Download the deployment virtual engine footprint package for **Wazuh 4.14.x** directly from the official repository portal.
+1. Download the deployment virtual engine footprint package for **Wazuh 4.14.4** directly from the official repository portal.
 2. Open VirtualBox and use the **Import Appliance** feature to load the OVA package file.
 3. Configure virtual resource allocations to at least **2 vCPUs** along with **4GB of RAM**.
 4. Set the Network adapter setting to use the shared isolated `NAT Network` option.
@@ -461,7 +461,7 @@ To evaluate the lab's defensive response capabilities, five separate attack scen
   nmap -sS -A -p- 192.168.1.5
   ```
 * **Telemetry Output:** Sysmon Event ID 3 logged multiple rapid inbound socket connections, which triggered a high-volume network warning block at Level 10.
-* **Automated Playbook Path:** The SOAR engine parsed the attacking host IP (`192.168.1.x`) against AbuseIPDB. Because it was a local private address, the lookup returned a 0% public abuse score, but Groq AI's logic correctly identified the high-frequency internal scanning behavior and escalated the threat.
+* **Automated Playbook Path:** The SOAR engine parsed the attacking host IP (`192.168.1.6`) against AbuseIPDB. Because it was a local private address, the lookup returned a 0% public abuse score, but Groq AI's logic correctly identified the high-frequency internal scanning behavior and escalated the threat.
 
 ### 8.4 Summary Attack Validation Matrix
 
