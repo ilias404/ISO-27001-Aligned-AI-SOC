@@ -126,14 +126,14 @@ The addition of the [SOCFortress](https://github.com/socfortress/Wazuh-Rules) ru
 ### 3.4 n8n SOAR
 [n8n](https://github.com/n8n-io/n8n) functions as the core Security Orchestration, Automation, and Response (SOAR) architecture. Running as a Dockerized instance on the Ubuntu SOC asset, it controls traffic routing, indicator parsing, multi-threaded intelligence lookups, and downstream incident creation.
 
-### 3.5 [Groq](https://console.groq.com/) AI Inference Layer (LLaMA 3.1)
-Replaces sluggish localized language models by leveraging the ultra-fast execution speeds of the cloud-hosted `llama-3.1-8b-instant` model.
+### 3.5 Groq AI Inference Layer (LLaMA 3.1)
+[Groq](https://console.groq.com/) replaces sluggish localized language models by leveraging the ultra-fast execution speeds of the cloud-hosted `llama-3.1-8b-instant` model.
 * Highly scalable free tier requiring no processing overhead on local laboratory virtual infrastructure.
 * Reaches raw execution performance indexes between 300 to 1000 tokens/second.
 * Driven by an explicit 10-tier security playbook configuration to structure unstructured telemetry reliably.
 
 ### 3.6 IRIS DFIR
-The Incident Response Information System (IRIS) acts as the secure platform for case management, timeline charting, evidence logging, and long-term event investigation. It runs inside a custom Docker Compose profile on the Ubuntu SOC platform, accessible via an authenticated REST API layer.
+The [Incident Response Information System (IRIS)](https://docs.dfir-iris.org/latest/getting_started/) acts as the secure platform for case management, timeline charting, evidence logging, and long-term event investigation. It runs inside a custom Docker Compose profile on the Ubuntu SOC platform, accessible via an authenticated REST API layer.
 
 ---
 
