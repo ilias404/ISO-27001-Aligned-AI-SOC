@@ -252,10 +252,7 @@ End of instructions.
 #### Node 9: IRIS Incident Case Automator
 Authenticates against the IRIS API via Bearer tokens. Instantly creates a structured record populated with the Groq analyst review text and alert indicators.
 
-#### Node 10: Routing Decision Gateway
-Checks if the original alert weight matches or exceeds Wazuh level 10. Critical detections bypass typical queues for immediate escalation.
-
-#### Node 11: Telegram Incident Response Bot
+#### Node 10: Telegram Incident Response Bot
 Formats high-severity alert metrics into clean, structured Markdown text and pushes it to an active Telegram broadcast group chat for immediate mobile notification.
 
 ---
