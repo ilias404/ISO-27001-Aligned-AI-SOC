@@ -530,5 +530,3 @@ To replicate this pipeline, copy the complete configuration block below and past
 * **ISO/IEC 27005:2022 Risk Management Standard:** Guidance on managing information security risks. Available at: `https://www.iso.org/standard/27005`
 
 ---
-*Developed for the M2 Cybersecurity Engineering Final Year Project.*
-````</Yes></T####></Low></Low>
