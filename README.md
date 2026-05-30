@@ -38,12 +38,12 @@ This project was carried out as part of the Final Year Project (PFA). The object
 * **Real-Time Visibility:** Implement deep, real-time threat detection using Wazuh SIEM and Sysmon.
 * **AI Integration Layer:** Integrate Groq LLaMA 3.1 to achieve rapid, automated alert analysis.
 * **SOAR Orchestration:** Automate incident response processing via an n8n pipeline.
-* **Incident Management:** Dynamically provision structured incident cases within the IRIS IRP.
+* **Incident Management:** Dynamically provision structured incident cases within the IRIS DFIR.
 * **Context Enrichment:** Automatically enrich indicators using external threat intelligence platforms (AbuseIPDB, VirusTotal).
 * **Compliance Alignment:** Formally map the defensive architecture to ISO 27001 Annex A controls and the ISO 27005 risk management framework.
 
 ### 1.3 Scope
-The laboratory configuration spans across multiple critical defensive security domains: Endpoint Detection and Response (EDR), Security Information and Event Management (SIEM), Security Orchestration, Automation and Response (SOAR), Incident Response Platforms (IRP), Threat Intelligence (TI), and AI-powered Security Analytics.
+The laboratory configuration spans across multiple critical defensive security domains: Endpoint Detection and Response (EDR), Security Information and Event Management (SIEM), Security Orchestration, Automation and Response (SOAR), Incident Response Platforms (DFIR), Threat Intelligence (TI), and AI-powered Security Analytics.
 
 ---
 
@@ -61,7 +61,7 @@ All nodes interface across a host-isolated VirtualBox NAT Network subnet (`192.1
 | Virtual Machine | Operating System | IP Address | Infrastructure Role |
 | :--- | :--- | :--- | :--- |
 | **Wazuh** | Amazon Linux (OVA) | `192.168.1.3` | Core SIEM / Analytics Server |
-| **Ubuntu SOC** | Ubuntu 22.04 LTS | `192.168.1.4` | SOAR Pipeline (n8n) + IRP (IRIS) |
+| **Ubuntu SOC** | Ubuntu 22.04 LTS | `192.168.1.4` | SOAR Pipeline (n8n) + DFIR (IRIS) |
 | **Windows 10** | Windows 10 Pro | `192.168.1.5` | Monitored Victim Endpoint |
 | **Kali Linux** | Kali Linux | `192.168.1.x` | Attack Simulation Node |
 
@@ -134,7 +134,7 @@ Replaces sluggish localized language models by leveraging the ultra-fast executi
 * Reaches raw execution performance indexes between 300 to 1000 tokens/second.
 * Driven by an explicit 10-tier security playbook configuration to structure unstructured telemetry reliably.
 
-### 3.6 IRIS IRP
+### 3.6 IRIS DFIR
 The Incident Response Information System (IRIS) acts as the secure platform for case management, timeline charting, evidence logging, and long-term event investigation. It runs inside a custom Docker Compose profile on the Ubuntu SOC platform, accessible via an authenticated REST API layer.
 
 ---
@@ -511,7 +511,7 @@ Manual Analyst Review:    ───────────────► 10-20
 Groq LLaMA Playbook Node:  ───► 0.35 Seconds (Microsecond Inference Engine)
 
 METRIC 3: INCIDENT DOCUMENTATION LIFECYCLE
-Manual IRP Case Logging:  ──────────────────────────────────► 5-10 Minutes
+Manual DFIR Case Logging:  ──────────────────────────────────► 5-10 Minutes
 SOAR Dynamic Injection:   ───► 2.8 Seconds (Instant Provisioning)
 ```
 
