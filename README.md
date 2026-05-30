@@ -16,13 +16,12 @@
 2. [Architecture & Network Topology](#2-architecture--network-topology)
 3. [Technology Stack](#3-technology-stack)
 4. [The SOAR Pipeline (n8n Workflow)](#4-the-soar-pipeline-n8n-workflow)
-5. [Detection Engineering & Rules](#5-detection-engineering--rules)
-6. [ISO 27001 / 27005 Compliance Mapping](#6-iso-27001--27005-compliance-mapping)
-7. [Installation & Deployment Guide](#7-installation--deployment-guide)
-8. [Attack Simulations & Results](#8-attack-simulations--results)
-9. [Challenges & Engineering Solutions](#9-challenges--engineering-solutions)
-10. [Results, Metrics & Conclusion](#10-results-metrics--conclusion)
-11. [Appendices & References](#11-appendices--references)
+5. [ISO 27001 / 27005 Compliance Mapping](#6-iso-27001--27005-compliance-mapping)
+6. [Installation & Deployment Guide](#7-installation--deployment-guide)
+7. [Attack Simulations & Results](#8-attack-simulations--results)
+8. [Challenges & Engineering Solutions](#9-challenges--engineering-solutions)
+9. [Results, Metrics & Conclusion](#10-results-metrics--conclusion)
+10. [Appendices & References](#11-appendices--references)
 
 ---
 
@@ -257,64 +256,12 @@ Formats high-severity alert metrics into clean, structured Markdown text and pus
 
 ---
 
-## 5. Detection Engineering & Rules
 
-The environment uses custom-tailored mapping files built to ingest Windows and Sysmon event structures.
-
-### 5.1 Crucial Rules Patterns
-The following rule configurations demonstrate how incoming logs are correlated and assigned severity ratings within `/var/ossec/etc/rules/local_rules.xml`:
-
-#### Sysmon Event ID 1: Encoded PowerShell Command Execution
-```xml
-<group name="windows,sysmon,powershell,">
-  <rule id="100091" level="12">
-    <if_sid>61603</if_sid>
-    <field name="win.system.eventID">^1$</field>
-    <field name="win.eventdata.commandLine">-enc|-encodedcommand|ZWNv|Y21k</field>
-    <description>Critical: Obfuscated or Base64 Encoded PowerShell Process Spawned</description>
-    <mitre>
-      <id>T1059.001</id>
-    </mitre>
-  </rule>
-</group>
-```
-
-#### Sysmon Event ID 11: Malicious Binary Drop (Mimikatz Footprint)
-```xml
-<group name="windows,sysmon,malware_drop,">
-  <rule id="100092" level="13">
-    <if_sid>61603</if_sid>
-    <field name="win.system.eventID">^11$</field>
-    <field name="win.eventdata.targetFilename">mimikatz\.exe|mimilib\.dll</field>
-    <description>Alert: Mimikatz Credential Dumping Executable Dropped onto Storage Volume</description>
-    <mitre>
-      <id>T1036</id>
-    </mitre>
-  </rule>
-</group>
-```
-
-#### Windows Security Log 4720: Unauthorized User Creation
-```xml
-<group name="windows,security_account,">
-  <rule id="100093" level="9">
-    <if_sid>60103</if_sid>
-    <field name="win.system.eventID">^4720$</field>
-    <description>Warning: Local User Account Created on Endpoint Architecture</description>
-    <mitre>
-      <id>T1136.001</id>
-    </mitre>
-  </rule>
-</group>
-```
-
----
-
-## 6. ISO 27001 / 27005 Compliance Mapping
+## 5. ISO 27001 / 27005 Compliance Mapping
 
 This lab is built to support compliance frameworks by acting as a technical control point that enforces and documents security operations.
 
-### 6.1 ISO 27001:2022 Annex A Control Mapping
+### 5.1 ISO 27001:2022 Annex A Control Mapping
 
 | Annex A Control ID | Formal Requirement Statement | Direct Technical Laboratory Implementation Strategy |
 | :--- | :--- | :--- |
@@ -326,7 +273,7 @@ This lab is built to support compliance frameworks by acting as a technical cont
 | **A.8.16** | Monitoring activities | The Wazuh Dashboard displays continuous, real-time event correlation and security metrics. |
 | **A.8.20** | Network security | VirtualBox NAT networks logically isolate production systems from simulation environments. |
 
-### 6.2 ISO 27005 Risk Management Framework Integration
+### 5.2 ISO 27005 Risk Management Framework Integration
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────────┐
@@ -355,18 +302,18 @@ This lab is built to support compliance frameworks by acting as a technical cont
 
 ---
 
-## 7. Installation & Deployment Guide
+## 6. Installation & Deployment Guide
 
 Follow this step-by-step setup guide to provision the complete security operations center laboratory topology.
 
-### 7.1 SIEM Infrastructure Deployment
+### 6.1 SIEM Infrastructure Deployment
 1. Download the deployment virtual engine footprint package for **Wazuh 4.14.4** directly from the official repository portal.
 2. Open VirtualBox and use the **Import Appliance** feature to load the OVA package file.
 3. Configure virtual resource allocations to at least **2 vCPUs** along with **4GB of RAM**.
 4. Set the Network adapter setting to use the shared isolated `NAT Network` option.
 5. Initialize the instance and verify terminal availability using default administrative credentials (`wazuh-user` / `wazuh`).
 
-### 7.2 Endpoint Telemetry Configuration
+### 6.2 Endpoint Telemetry Configuration
 1. Access the target Windows 10 deployment system and initialize an elevated administrative PowerShell shell console.
 2. Download and extract the Sysinternals Sysmon system monitoring application payload:
 ```powershell
@@ -386,7 +333,7 @@ Follow this step-by-step setup guide to provision the complete security operatio
    NET START WazuhSvc
    ```
 
-### 7.3 Advanced Threat Modeling Expansion
+### 6.3 Advanced Threat Modeling Expansion
 Incorporate specialized SOCFortress alerting maps directly into the core Wazuh engine infrastructure:
 ```bash
 sudo su -
@@ -395,7 +342,7 @@ curl -so ~/wazuh_socfortress_rules.sh \
   && bash ~/wazuh_socfortress_rules.sh
 ```
 
-### 7.4 Core Orchestration Stack Provisioning
+### 6.4 Core Orchestration Stack Provisioning
 On the dedicated Ubuntu SOC infrastructure node, install the Docker and Docker Compose runtimes, then spin up the containerized stack:
 
 ```bash
@@ -426,7 +373,7 @@ nano .env # Set your IRIS_ADM_PASSWORD secret
 docker compose up -d
 ```
 
-### 7.5 Alert Routing Configuration
+### 6.5 Alert Routing Configuration
 To route events out of the Wazuh engine directly into the automated SOAR pipeline, edit `/var/ossec/etc/ossec.conf` and add a new integration block:
 ```xml
 <integration>
@@ -453,16 +400,16 @@ sudo systemctl restart wazuh-manager
 
 ---
 
-## 8. Attack Simulations & Results
+## 7. Attack Simulations & Results
 
 To evaluate the lab's defensive response capabilities, five separate attack scenarios were executed from the Kali Linux asset.
 
-### 8.1 Scenario A: Credential Dumping Drop (Mimikatz Footprint)
+### 7.1 Scenario A: Credential Dumping Drop (Mimikatz Footprint)
 * **Adversary Action Matrix:** Dropped an active execution mock of the Mimikatz code engine onto the desktop folder layout.
 * **Telemetry Output:** Sysmon Event ID 11 detected the new file addition, triggering internal rule ID `100092` at severity Level 13.
 * **Automated Playbook Path:** The SOAR workflow routed the file's SHA256 signature to VirusTotal. VirusTotal flagged the file as highly malicious (e.g., 58/72 detections), which Groq AI used to verify the attack threat vector.
 
-### 8.2 Scenario B: Obfuscated Execution (Encoded PowerShell Profile)
+### 7.2 Scenario B: Obfuscated Execution (Encoded PowerShell Profile)
 * **Adversary Action Matrix:** Executed an obfuscated script payload using Base64 encoding parameters to bypass standard string filtering:
 ```powershell
   powershell.exe -enc ZQBjAGgAbwAg"SGFja2VkIEJ5IEthbGki"
@@ -470,7 +417,7 @@ To evaluate the lab's defensive response capabilities, five separate attack scen
 * **Telemetry Output:** Sysmon Event ID 1 logged the process creation and captured the command-line arguments, triggering alert ID `100091` at Level 12.
 * **Automated Playbook Path:** The n8n script extracted the suspicious string payload. Groq AI decoded the command, mapped the activity to MITRE ATT&CK technique **T1059.001 (PowerShell)**, and opened an exploitation incident file.
 
-### 8.3 Scenario C: Domain Footprint Discovery (Target Subnet Scanning)
+### 7.3 Scenario C: Domain Footprint Discovery (Target Subnet Scanning)
 * **Adversary Action Matrix:** Ran an intensive target port scan from the Kali Linux system targeting all open communication sockets on the Windows asset:
 ```bash
   nmap -sS -A -p- 192.168.1.5
@@ -478,7 +425,7 @@ To evaluate the lab's defensive response capabilities, five separate attack scen
 * **Telemetry Output:** Sysmon Event ID 3 logged multiple rapid inbound socket connections, which triggered a high-volume network warning block at Level 10.
 * **Automated Playbook Path:** The SOAR engine parsed the attacking host IP (`192.168.1.6`) against AbuseIPDB. Because it was a local private address, the lookup returned a 0% public abuse score, but Groq AI's logic correctly identified the high-frequency internal scanning behavior and escalated the threat.
 
-### 8.4 Summary Attack Validation Matrix
+### 7.4 Summary Attack Validation Matrix
 
 | Exploitation Target | Offensive Mechanism | Captured Event ID | Target MITRE Technique | Applied Severity Level | Response Action Taken |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -490,29 +437,29 @@ To evaluate the lab's defensive response capabilities, five separate attack scen
 
 ---
 
-## 9. Challenges & Engineering Solutions
+## 8. Challenges & Engineering Solutions
 
-### 9.1 Overcoming Webhook SSL Verification Failures
+### 8.1 Overcoming Webhook SSL Verification Failures
 * **The Problem:** The default python integration framework inside the Wazuh manager engine (`shuffle.py`) systematically dropped out during data exchanges with n8n. This occurred because the internal script rejected the self-signed SSL certificate protecting the containerized n8n instance.
 * **The Engineering Solution:** Modified the Python runtime code within `/var/ossec/integrations/shuffle.py`. Added a targeted `verify=False` flag to the POST request execution parameters, allowing alert data to flow securely within the isolated lab environment.
 
-### 9.2 Eliminating Alert Fatigue via Intelligent Caching
+### 8.2 Eliminating Alert Fatigue via Intelligent Caching
 * **The Problem:** Running high-frequency, automated attack tools (such as Hydra password spraying or intensive Nmap port scans) generated hundreds of raw log entries every second. Passing each log entry individually through the SOAR workflow threatened to exhaust free API limits and flood the IRIS platform with duplicate cases.
 * **The Engineering Solution:** Built a JavaScript deduplication script directly ahead of the threat intelligence nodes. This custom node reads incoming source addresses and file signatures, storing them in a dynamic internal cache with a 5-minute time-to-live (TTL) window. Duplicate logs within this timeframe update the existing event metrics rather than triggering a new workflow.
 
-### 9.3 Resolving Resource Constraints via Cloud AI Interfacing
+### 8.3 Resolving Resource Constraints via Cloud AI Interfacing
 * **The Problem:** The host hardware platform (16GB RAM) experienced severe performance drops when running a local LLM via Ollama alongside the four required virtual machines. Memory bottlenecks caused long processing delays, raising alert triage times to over 45 seconds per event.
 * **The Engineering Solution:** Replaced the local Ollama deployment with the high-speed cloud-based Groq API running `llama-3.1-8b-instant`. This change shifted the heavy processing load away from the host system, cutting the AI analysis window down to a sub-second response rate.
 
-### 9.4 Fixing JSON Expression Injections inside n8n Nodes
+### 8.4 Fixing JSON Expression Injections inside n8n Nodes
 * **The Problem:** When using raw JSON request fields in n8n's standard HTTP Request modules, input variables wrapped in `={{ ... }}` notation frequently failed to compile or broke the payload layout.
 * **The Engineering Solution:** Configured the target n8n nodes to handle data entries using individual input blocks rather than a single raw text payload, resolving code parsing errors.
 
 ---
 
-## 10. Results, Metrics & Conclusion
+## 9. Results, Metrics & Conclusion
 
-### 10.1 Analytical Metrics Performance Review
+### 9.1 Analytical Metrics Performance Review
 
 The automated AI-driven triage architecture achieved significant performance improvements across three key operational metrics:
 
@@ -530,14 +477,14 @@ Manual DFIR Case Logging:  ─────────────────�
 SOAR Dynamic Injection:   ───► 2.8 Seconds (Instant Provisioning)
 ```
 
-### 10.2 Final Review
+### 9.2 Final Review
 This project successfully demonstrates how an AI-augmented SOC laboratory can be deployed entirely using open-source tools. By integrating automated threat intelligence enrichment with an advanced LLM inference engine, the architecture eliminates typical manual bottleneck phases from the incident response lifecycle. 
 
 The resulting platform delivers fast, reliable, and reproducible threat monitoring that meets the standard operational requirements defined by the ISO 27001 and ISO 27005 frameworks.
 
 ---
 
-## 11. Appendices & References
+## 10. Appendices & References
 
 ### Appendix A: Complete Operational JSON n8n Blueprint Pipeline
 To replicate this pipeline, copy the complete configuration block below and paste it directly into your local n8n workflow canvas panel:
