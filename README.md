@@ -2,8 +2,7 @@
 
 🛡️ AI-Augmented SOC Lab: ISO 27001/27005 Aligned
 
-> **Design and Implementation of an Automated Security Operations Center**[cite: 2]
-> *Final Year Project (PFA) — M2 Cybersecurity Engineering*[cite: 1]
+> **Design and Implementation of an Automated Security Operations Center**
 
 ![Wazuh](https://img.shields.io/badge/SIEM-Wazuh-blue)
 ![n8n](https://img.shields.io/badge/SOAR-n8n-orange)
