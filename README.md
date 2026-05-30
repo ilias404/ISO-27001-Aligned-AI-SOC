@@ -85,7 +85,7 @@ All nodes interface across a host-isolated VirtualBox NAT Network subnet (`192.1
 │                            SOC ZONE                         │
 │                                                             │
 │  ┌──────────────┐      ┌──────────────┐      ┌───────────┐  │
-│  │  Wazuh SIEM  │─────▶│   n8n SOAR   │─────▶│  Groq AI  │  │
+│  │  Wazuh SIEM  │─────▶│   n8n SOAR   │─────▶│  Groq AI │  │
 │  │ (SOCFortress)│      │  (Webhook)   │      │ (LLaMA3.1)│  │
 │  └──────────────┘      └──────┬───────┘      └─────┬─────┘  │
 │                               │                    │        │
