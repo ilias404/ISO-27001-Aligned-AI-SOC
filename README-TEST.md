@@ -4,7 +4,7 @@
 
 ![Wazuh](https://img.shields.io/badge/SIEM-Wazuh-blue)
 ![n8n](https://img.shields.io/badge/SOAR-n8n-orange)
-![IRIS](https://img.shields.io/badge/IRP-IRIS-purple)
+![IRIS](https://img.shields.io/badge/DFIR-IRIS-purple)
 ![Groq](https://img.shields.io/badge/AI-Groq%20LLaMA3-green)
 ![ISO](https://img.shields.io/badge/Compliance-ISO%2027001%2F27005-red)
 
