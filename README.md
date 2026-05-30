@@ -1,4 +1,4 @@
-<img width="1819" height="509" alt="image" src="https://github.com/user-attachments/assets/da8e51f5-1fdd-4b3a-972a-0a26eff6b61f" /># 🛡️ AI-Augmented SOC Lab: ISO 27001/27005 Aligned
+🛡️ AI-Augmented SOC Lab: ISO 27001/27005 Aligned
 
 > **Design and Implementation of an Automated Security Operations Center**
 
