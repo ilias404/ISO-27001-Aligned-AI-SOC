@@ -110,7 +110,7 @@ All nodes interface across a host-isolated VirtualBox NAT Network subnet (`192.1
 Wazuh functions as the central log correlation, security monitoring, and XDR analytics platform. It intercepts inbound event frames from endpoint nodes, applies precise decoding, and maps matches to alerting chains.
 * Deployed utilizing a streamlined, pre-configured OVA virtual appliance architecture.
 * Ingests Windows Security Event Logs alongside deep Sysmon operational telemetry.
-* Augmented with community rulesets from SOCFortress to map indicators to the MITRE ATT&CK framework.
+* Augmented with community rulesets from [SOCFortress](https://github.com/socfortress/Wazuh-Rules) to map indicators to the MITRE ATT&CK framework.
 * Utilizes an integration webhook mapping scheme to reliably forward parsed alert structures to the SOAR environment.
 
 ### 3.2 Sysmon (System Monitor)
@@ -123,7 +123,7 @@ Installed on the victim host as an internal system service to extract rich kerne
 * **Event ID 17 / 18:** Named Pipe interaction tracking.
 
 ### 3.3 SOCFortress Community Rules
-The addition of the SOCFortress rules repository upgrades the default Wazuh deployment with over 50 optimized rulesets. This engine translates raw log formats directly into actionable telemetry tagged with specific MITRE ATT&CK metadata, covering PowerShell exploits, lateral movement, registry hijacking, and host enumeration.
+The addition of the [SOCFortress](https://github.com/socfortress/Wazuh-Rules) rules repository upgrades the default Wazuh deployment with over 50 optimized rulesets. This engine translates raw log formats directly into actionable telemetry tagged with specific MITRE ATT&CK metadata, covering PowerShell exploits, lateral movement, registry hijacking, and host enumeration.
 
 ### 3.4 n8n SOAR
 n8n functions as the core Security Orchestration, Automation, and Response (SOAR) architecture. Running as a Dockerized instance on the Ubuntu SOC asset, it controls traffic routing, indicator parsing, multi-threaded intelligence lookups, and downstream incident creation.
