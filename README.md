@@ -1,4 +1,4 @@
-# 🛡️ AI-Augmented SOC Lab — PFA M2
+# 🛡️ ISO-27001-Aligned-AI-SOC
 
 > Design and Implementation of an AI-Augmented Security Operations Center aligned with ISO 27001 & ISO 27005
 
