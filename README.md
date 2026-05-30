@@ -112,7 +112,7 @@ Wazuh functions as the central log correlation, security monitoring, and XDR ana
 * Utilizes an integration webhook mapping scheme to reliably forward parsed alert structures to the SOAR environment.
 
 ### 3.2 Sysmon (System Monitor)
-Installed on the victim host as an internal system service to extract rich kernel-level activities. Spawns deep, granular events using the highly granular **olafhartong modular configuration**.
+Installed on the victim host as an internal system service to extract rich kernel-level activities. Spawns deep, granular events using the highly granular **[olafhartong modular configuration](https://github.com/olafhartong/sysmon-modular)**.
 * **Event ID 1:** Process Creation tracking (including complete cryptographic command-line execution hashes).
 * **Event ID 3:** Network Connection mappings (tracking remote socket pairings).
 * **Event ID 7:** Image/DLL Load telemetry.
