@@ -334,14 +334,14 @@ NET START WazuhSvc
 ```
 Wazuh is now successfully deployed on the Windows 10 endpoint.
 
-### 6.3 Advanced Threat Modeling Expansion
+### 6.3 Advanced Threat Modeling Expansion (SOCFortress)
 Incorporate specialized [SOCFortress](https://github.com/socfortress/Wazuh-Rules) alerting maps directly into the core Wazuh engine infrastructure:
 ```bash
 sudo su
 curl -so ~/wazuh_socfortress_rules.sh https://raw.githubusercontent.com/socfortress/Wazuh-Rules/main/wazuh_socfortress_rules.sh && bash ~/wazuh_socfortress_rules.sh
 ```
 
-### 6.4 Core Orchestration Stack Provisioning
+### 6.4 Core Orchestration Stack Provisioning (n8n + DFIR IRIS)
 On the dedicated Ubuntu Live Server infrastructure node, install the Docker and Docker Compose runtimes, then spin up the containerized stack:
 
 ```bash
@@ -378,6 +378,25 @@ cp .env.model .env
 docker compose pull
 docker compose up
 sudo systemctl enable docker
+```
+
+To update the default administrator username and password for the IRIS DFIR platform, modify the environment configuration variables:
+
+1. Navigate to the IRIS deployment directory and open the configuration file:
+   ```bash
+   cd iris-web
+   nano .env
+   ```
+Locate and modify the following environment variables with your preferred credentials:
+
+```
+IRIS_ADM_USERNAME=your_custom_username
+IRIS_ADM_PASSWORD=your_secure_password
+```
+Restart the Docker containers to apply the new credentials:
+
+```bash
+docker compose down && docker compose up -d
 ```
 
 ### 6.5 Alert Routing Configuration
