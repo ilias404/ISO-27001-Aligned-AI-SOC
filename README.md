@@ -241,7 +241,7 @@ This lab is built to support compliance frameworks by acting as a technical cont
 ```text
 ┌────────────────────────────────────────────────────────────────────────────┐
 │                    1. RISK IDENTIFICATION (ISO 27005)                      │
-│       Wazuh Log Interception + Sysmon Engine + SOCFortress Schemas        │
+│       Wazuh Log Interception + Sysmon Engine + SOCFortress Schemas         │
 └─────────────────────────────────────┬──────────────────────────────────────┘
                                       │
                                       ▼
@@ -253,13 +253,13 @@ This lab is built to support compliance frameworks by acting as a technical cont
                                       ▼
 ┌────────────────────────────────────────────────────────────────────────────┐
 │                      3. RISK EVALUATION (ISO 27005)                        │
-│   Groq Generates Dynamic Risk Score (0-100) & Formats MITRE Classifications │
+│  Groq Generates Dynamic Risk Score (0-100) & Formats MITRE Classifications │
 └─────────────────────────────────────┬──────────────────────────────────────┘
                                       │
                                       ▼
 ┌────────────────────────────────────────────────────────────────────────────┐
 │                      4. RISK TREATMENT (ISO 27005)                         │
-│      Auto-Case Creation (IRIS) + Critical Triage Alerts via Telegram        │
+│      Auto-Case Creation (IRIS) + Critical Triage Alerts via Telegram       │
 └────────────────────────────────────────────────────────────────────────────┘
 ```
 
