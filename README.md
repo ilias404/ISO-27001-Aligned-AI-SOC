@@ -334,7 +334,7 @@ NET START WazuhSvc
 Wazuh is now successfully deployed on the Windows 10 endpoint.
 
 ### 6.3 Advanced Threat Modeling Expansion
-Incorporate specialized SOCFortress alerting maps directly into the core Wazuh engine infrastructure:
+Incorporate specialized [SOCFortress](https://github.com/socfortress/Wazuh-Rules) alerting maps directly into the core Wazuh engine infrastructure:
 ```bash
 sudo su
 curl -so ~/wazuh_socfortress_rules.sh https://raw.githubusercontent.com/socfortress/Wazuh-Rules/main/wazuh_socfortress_rules.sh && bash ~/wazuh_socfortress_rules.sh
