@@ -277,13 +277,13 @@ Follow this step-by-step setup guide to provision the complete security operatio
 
 ### 6.2 Endpoint Agent Deployment
 Now, on the Windows 10 machine, open an Administrator Powershell and deploy the Wazuh agent using the following instructions:
-`powershell
+```powershell
 Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.4-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='192.168.1.3' WAZUH_AGENT_NAME='demo' 
-`
+```
 And: 
-`powershell
+````powershell
 NET START Wazuh
-`
+````
 Wazuh is now successfully deployed on the endpoint.
 
 ### 6.3 Advanced Threat Modeling Expansion
