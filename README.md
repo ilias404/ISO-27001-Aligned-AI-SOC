@@ -272,9 +272,7 @@ Follow this step-by-step setup guide to provision the complete security operatio
 ### 6.1 SIEM Infrastructure Deployment
 1. Download the deployment virtual engine footprint package for **Wazuh 4.14.4** directly from [here](https://documentation.wazuh.com/current/deployment-options/virtual-machine/virtual-machine.html).
 2. Open VirtualBox and use the **Import Appliance** feature to load the OVA package file.
-3. Configure virtual resource allocations to at least **2 vCPUs** along with **4GB of RAM**.
-4. Set the Network adapter setting to use the shared isolated `NAT Network` option.
-5. Initialize the instance and verify terminal availability using default administrative credentials (`wazuh-user` / `wazuh`).
+![importappliance.png](/screenshots/importappliance.png)
 
 ### 6.2 Endpoint Telemetry Configuration
 1. Access the target Windows 10 deployment system and initialize an elevated administrative PowerShell shell console.
