@@ -457,7 +457,7 @@ The complete n8n automation workflow is available in [`n8n-workflow.json`](./n8n
 ### How to Import
 
 1. Open n8n → **Workflows → Import from File**
-2. Select `wazuh-optimal-workflow.json`
+2. Select `n8n-workflow.json`
 3. Replace all placeholder values with your own credentials
 
 ### Configuration Required
@@ -471,7 +471,7 @@ Before using the workflow, replace the following placeholders:
 | `<YOUR_VIRUSTOTAL_API_KEY>` | VirusTotal node | API key from virustotal.com |
 | `<YOUR_IRIS_API_KEY>` | IRIS Case Creation node | From IRIS → Profile → API Key |
 | `<YOUR_IRIS_IP>` | IRIS Case Creation node | Your IRIS instance IP |
-| `<YOUR_TELEGRAM_CHAT_ID>` | Telegram node | From @userinfobot on Telegram |
+| `<YOUR_TELEGRAM_CHAT_ID>` | Telegram node | From @Getmyid_Work_Bot on Telegram |
 
 ### Workflow Structure
 
