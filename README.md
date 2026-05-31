@@ -466,10 +466,10 @@ Before using the workflow, replace the following placeholders:
 
 | Placeholder | Where | Description |
 |-------------|-------|-------------|
-| `<YOUR_GROQ_API_KEY>` | AI Analysis node | Groq API key from console.groq.com |
-| `<YOUR_ABUSEIPDB_API_KEY>` | AbuseIPDB node | API key from abuseipdb.com |
-| `<YOUR_VIRUSTOTAL_API_KEY>` | VirusTotal node | API key from virustotal.com |
-| `<YOUR_IRIS_API_KEY>` | IRIS Case Creation node | From IRIS → Profile → API Key |
+| `<YOUR_GROQ_API_KEY>` | AI Analysis node | Groq API key from [console.groq.com](https://console.groq.com/) |
+| `<YOUR_ABUSEIPDB_API_KEY>` | AbuseIPDB node | API key from [abuseipdb.com](https://www.abuseipdb.com/) |
+| `<YOUR_VIRUSTOTAL_API_KEY>` | VirusTotal node | API key from [virustotal.com](https://www.virustotal.com/) |
+| `<YOUR_IRIS_API_KEY>` | IRIS Case Creation node | From IRIS > Profile > My Settings > API Key |
 | `<YOUR_IRIS_IP>` | IRIS Case Creation node | Your IRIS instance IP |
 | `<YOUR_TELEGRAM_CHAT_ID>` | Telegram node | From @Getmyid_Work_Bot on Telegram |
 
