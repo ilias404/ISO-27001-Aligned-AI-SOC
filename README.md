@@ -289,28 +289,31 @@ Wazuh is now successfully deployed on the endpoint.
 ### 6.3 Advanced Threat Modeling Expansion
 Incorporate specialized SOCFortress alerting maps directly into the core Wazuh engine infrastructure:
 ```bash
-sudo su -
-curl -so ~/wazuh_socfortress_rules.sh \
-  [https://raw.githubusercontent.com/socfortress/Wazuh-Rules/main/wazuh_socfortress_rules.sh](https://raw.githubusercontent.com/socfortress/Wazuh-Rules/main/wazuh_socfortress_rules.sh) \
-  && bash ~/wazuh_socfortress_rules.sh
+sudo su
+curl -so ~/wazuh_socfortress_rules.sh https://raw.githubusercontent.com/socfortress/Wazuh-Rules/main/wazuh_socfortress_rules.sh && bash ~/wazuh_socfortress_rules.sh
 ```
 
 ### 6.4 Core Orchestration Stack Provisioning
 On the dedicated Ubuntu SOC infrastructure node, install the Docker and Docker Compose runtimes, then spin up the containerized stack:
 
 ```bash
-# Initialize Docker Engine Dependencies
-sudo apt update && sudo apt install -y ca-certificates curl gnupg
+# Docker Installation
+sudo apt update
+sudo apt install -y ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL [https://download.docker.com/linux/ubuntu/gpg](https://download.docker.com/linux/ubuntu/gpg) | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo usermod -aG docker $USER
+newgrp docker
 
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
-  [https://download.docker.com/linux/ubuntu](https://download.docker.com/linux/ubuntu) $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
-  | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-# Spin Up Containerized n8n SOAR Node Instance
+# n8n Installation
 docker run -d \
   --name n8n \
   -p 5678:5678 \
@@ -319,11 +322,13 @@ docker run -d \
   --restart unless-stopped \
   n8nio/n8n
 
-# Deploy IRIS Defending Management Platform
-git clone [https://github.com/dfir-iris/iris-web.git](https://github.com/dfir-iris/iris-web.git)
-cd iris-web && cp .env.model .env
-nano .env # Set your IRIS_ADM_PASSWORD secret
-docker compose up -d
+# DFIR/IRIS Installation
+git clone https://github.com/dfir-iris/iris-web.git
+cd iris-web
+git checkout v2.4.20
+cp .env.model .env
+docker compose pull
+docker compose up
 ```
 
 ### 6.5 Alert Routing Configuration
