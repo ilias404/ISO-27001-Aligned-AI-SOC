@@ -58,7 +58,7 @@ All nodes interface across a host-isolated VirtualBox NAT Network subnet (`192.1
 | Virtual Machine | Operating System | NAT Network IP | Host-Only IP | RAM | Disk |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Wazuh** | Amazon Linux (OVA) | `192.168.1.3` | *-* | `8 GB` | `25 GB` |
-| **Ubuntu SOC** | Ubuntu 22.04 LTS | `192.168.1.4` | `192.168.56.20` | `4 GB` | `30 GB` |
+| **Ubuntu Live Server** | Ubuntu 22.04 LTS | `192.168.1.4` | `192.168.56.20` | `4 GB` | `30 GB` |
 | **Windows 10** | Windows 10 Pro | `192.168.1.5` | `192.168.56.10` | `6 GB` | `30 GB` |
 | **Kali Linux** | Kali Linux | `192.168.1.6` | *-* | `2 GB` | `45 GB` |
 
@@ -123,7 +123,7 @@ Installed on the victim host as an internal system service to extract rich kerne
 The addition of the [SOCFortress](https://github.com/socfortress/Wazuh-Rules) rules repository upgrades the default Wazuh deployment with over 50 optimized rulesets. This engine translates raw log formats directly into actionable telemetry tagged with specific MITRE ATT&CK metadata, covering PowerShell exploits, lateral movement, registry hijacking, and host enumeration.
 
 ### 3.4 n8n SOAR
-[n8n](https://github.com/n8n-io/n8n) functions as the core Security Orchestration, Automation, and Response (SOAR) architecture. Running as a Dockerized instance on the Ubuntu SOC asset, it controls traffic routing, indicator parsing, multi-threaded intelligence lookups, and downstream incident creation.
+[n8n](https://github.com/n8n-io/n8n) functions as the core Security Orchestration, Automation, and Response (SOAR) architecture. Running as a Dockerized instance on the Ubuntu Live Server, it controls traffic routing, indicator parsing, multi-threaded intelligence lookups, and downstream incident creation.
 
 ### 3.5 Groq AI Inference Layer (LLaMA 3.1)
 [Groq](https://console.groq.com/) replaces sluggish localized language models by leveraging the ultra-fast execution speeds of the cloud-hosted `llama-3.1-8b-instant` model.
@@ -132,7 +132,7 @@ The addition of the [SOCFortress](https://github.com/socfortress/Wazuh-Rules) ru
 * Driven by an explicit 10-tier security playbook configuration to structure unstructured telemetry reliably.
 
 ### 3.6 IRIS DFIR
-The [Incident Response Information System (IRIS)](https://docs.dfir-iris.org/latest/getting_started/) acts as the secure platform for case management, timeline charting, evidence logging, and long-term event investigation. It runs inside a custom Docker Compose profile on the Ubuntu SOC platform, accessible via an authenticated REST API layer.
+The [Incident Response Information System (IRIS)](https://docs.dfir-iris.org/latest/getting_started/) acts as the secure platform for case management, timeline charting, evidence logging, and long-term event investigation. It runs inside a custom Docker Compose profile on the Ubuntu Live Server, accessible via an authenticated REST API layer.
 
 ---
 
@@ -341,7 +341,7 @@ curl -so ~/wazuh_socfortress_rules.sh https://raw.githubusercontent.com/socfortr
 ```
 
 ### 6.4 Core Orchestration Stack Provisioning
-On the dedicated Ubuntu SOC infrastructure node, install the Docker and Docker Compose runtimes, then spin up the containerized stack:
+On the dedicated Ubuntu Live Server infrastructure node, install the Docker and Docker Compose runtimes, then spin up the containerized stack:
 
 ```bash
 # Docker Installation
@@ -405,13 +405,13 @@ sudo systemctl restart wazuh-manager
 
 ### 6.6 Networking Configuration
 
-To establish communication across the laboratory topology, all virtual machines (**Windows 10**, **Wazuh OVA**, **Ubuntu SOC**, and **Kali Linux**) are bound to a unified VirtualBox **NAT Network** (`192.168.1.0/24`) as their primary interface. 
+To establish communication across the laboratory topology, all virtual machines (**Windows 10**, **Wazuh OVA**, **Ubuntu Live Server**, and **Kali Linux**) are bound to a unified VirtualBox **NAT Network** (`192.168.1.0/24`) as their primary interface. 
 
 To enable seamless administration of the web services hosted on the Ubuntu node (n8n and IRIS DFIR) directly from the physical host machine's web browser, a secondary **Host-Only Adapter** is attached to the Ubuntu VM.
 
 #### Step-by-Step Ubuntu Netplan Setup
 
-1. Open the Netplan configuration file on the Ubuntu SOC VM:
+1. Open the Netplan configuration file on the Ubuntu Live Server VM:
    ```bash
    sudo nano /etc/netplan/00-installer-config.yaml
    ```
@@ -434,7 +434,7 @@ network:
 ```bash
 sudo netplan apply
 ```
-The Ubuntu SOC services are now securely accessible from your host machine via http://192.168.56.20:5678 (n8n) and https://192.168.56.20 (IRIS DFIR), while keeping all simulated attack traffic isolated within the NAT network.
+The Ubuntu Live Server services are now securely accessible from your host machine via http://192.168.56.20:5678 (n8n) and https://192.168.56.20 (IRIS DFIR), while keeping all simulated attack traffic isolated within the NAT network.
 
 
 
