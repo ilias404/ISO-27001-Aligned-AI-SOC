@@ -452,7 +452,7 @@ The Ubuntu Live Server services are now securely accessible from the host machin
 
 ## 7. Workflows
 
-The complete n8n automation workflow is available in [`/workflows/wazuh-optimal-workflow.json`](./workflows/wazuh-optimal-workflow.json).
+The complete n8n automation workflow is available in [`n8n-workflow.json`](./n8n-workflow.json).
 
 ### How to Import
 
