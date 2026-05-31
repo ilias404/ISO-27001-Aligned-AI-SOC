@@ -444,7 +444,7 @@ network:
 ```bash
 sudo netplan apply
 ```
-The Ubuntu Live Server services are now securely accessible from your host machine via http://192.168.56.20:5678 (n8n) and https://192.168.56.20 (IRIS DFIR), while keeping all simulated attack traffic isolated within the NAT network.
+The Ubuntu Live Server services are now securely accessible from the host machine via `http://192.168.56.20:5678` (n8n) and `https://192.168.56.20` (IRIS DFIR), while keeping all simulated attack traffic isolated within the NAT network.
 
 
 
