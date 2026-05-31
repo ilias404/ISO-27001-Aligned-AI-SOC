@@ -55,12 +55,12 @@ The laboratory infrastructure is virtualized via VirtualBox and split into three
 ### 2.2 Network Design
 All nodes interface across a host-isolated VirtualBox NAT Network subnet (`192.168.1.0/24`) to permit secure lateral log forwarding and simulation traffic without exposing production host systems. A secondary Host-Only adapter (`192.168.56.0/24`) is used to allow easy access to web services (n8n, IRIS) from the physical host's browser while keeping simulated attack traffic completely isolated inside the NAT network.
 
-| Virtual Machine | Operating System | NAT Network IP | Host-Only IP | RAM | Disk | Infrastructure Role |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Wazuh** | Amazon Linux (OVA) | `192.168.1.3` | *N/A* | `8 GB` | `25 GB` | Core SIEM / Analytics Server |
-| **Ubuntu SOC** | Ubuntu 22.04 LTS | `192.168.1.4` | `192.168.56.20` | `4 GB` | `30 GB` | SOAR Pipeline (n8n + DFIR/IRIS) |
-| **Windows 10** | Windows 10 Pro | `192.168.1.5` | `192.168.56.10` | `6 GB` | `30 GB` | Monitored Victim Endpoint |
-| **Kali Linux** | Kali Linux | `192.168.1.6` | *N/A* | *N/A* | *N/A* | Attack Simulation Node |
+| Virtual Machine | Operating System | NAT Network IP | Host-Only IP | RAM | Disk |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Wazuh** | Amazon Linux (OVA) | `192.168.1.3` | *N/A* | `8 GB` | `25 GB` |
+| **Ubuntu SOC** | Ubuntu 22.04 LTS | `192.168.1.4` | `192.168.56.20` | `4 GB` | `30 GB` |
+| **Windows 10** | Windows 10 Pro | `192.168.1.5` | `192.168.56.10` | `6 GB` | `30 GB` |
+| **Kali Linux** | Kali Linux | `192.168.1.6` | *N/A* | *N/A* | *N/A* |
 
 ### 2.3 Comprehensive Data Flow Architecture
 
