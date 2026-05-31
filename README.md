@@ -494,23 +494,7 @@ Before using the workflow, replace the following placeholders:
 
 ### Workflow Structure
 
-```
-Wazuh Webhook
-      ↓
-Extract Indicators (normalize + deduplicate)
-      ↓
-Has IP? ──→ AbuseIPDB
-Has Hash? ──→ VirusTotal
-      ↓
-Converge to AI
-      ↓
-AI Analysis via Groq (LLaMA 3.1-8b-instant)
-      ↓
-IRIS Case Creation
-      ↓
-Alert Notification via Telegram
-```
-
+![workflow.png](/screenshots/workflow.png)
 
 ---
 
