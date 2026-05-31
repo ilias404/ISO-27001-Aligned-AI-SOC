@@ -272,27 +272,19 @@ Follow this step-by-step setup guide to provision the complete security operatio
 ### 6.1 SIEM Infrastructure Deployment
 1. Download the deployment virtual engine footprint package for **Wazuh 4.14.4** directly from [here](https://documentation.wazuh.com/current/deployment-options/virtual-machine/virtual-machine.html).
 2. Open VirtualBox and use the **Import Appliance** feature to load the OVA package file.
+
 ![importappliance.png](/screenshots/importappliance.png)
 
-### 6.2 Endpoint Telemetry Configuration
-1. Access the target Windows 10 deployment system and initialize an elevated administrative PowerShell shell console.
-2. Download and extract the Sysinternals Sysmon system monitoring application payload:
-```powershell
-   Invoke-WebRequest -Uri "[https://download.sysinternals.com/files/Sysmon.zip](https://download.sysinternals.com/files/Sysmon.zip)" -OutFile "C:\Sysmon.zip"
-   Expand-Archive -Path "C:\Sysmon.zip" -DestinationPath "C:\Sysmon"
-   ```
-3. Fetch the optimized modular detection rule set schema written by Olaf Hartong:
-```powershell
-   Invoke-WebRequest -Uri "[https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml](https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml)" -OutFile "C:\Sysmon\sysmonconfig.xml"
-   ```
-4. Install the service background framework with active monitoring rules applied:
-```powershell
-   C:\Sysmon\Sysmon64.exe -accepteula -i C:\Sysmon\sysmonconfig.xml
-   ```
-5. Install the official Windows Wazuh MSI Agent engine. Open `C:\Program Files (x86)\ossec-agent\ossec.conf` and point the `manager.address` variable to the Wazuh server's IP address (`192.168.1.3`). Start the agent service context:
-```powershell
-   NET START WazuhSvc
-   ```
+### 6.2 Endpoint Agent Deployment
+Now, on the Windows 10 machine, open an Administrator Powershell and deploy the Wazuh agent using the following instructions:
+`powershell
+Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.4-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='192.168.1.3' WAZUH_AGENT_NAME='demo' 
+`
+And: 
+`powershell
+NET START Wazuh
+`
+Wazuh is now successfully deployed on the endpoint.
 
 ### 6.3 Advanced Threat Modeling Expansion
 Incorporate specialized SOCFortress alerting maps directly into the core Wazuh engine infrastructure:
