@@ -405,7 +405,13 @@ sudo systemctl restart wazuh-manager
 
 ### 6.6 Networking Configuration
 
-To establish communication across the laboratory topology, all virtual machines (**Windows 10**, **Wazuh OVA**, **Ubuntu Live Server**, and **Kali Linux**) are bound to a unified VirtualBox **NAT Network** (`192.168.1.0/24`) as their primary interface. 
+To establish communication across the laboratory topology, all virtual machines (**Windows 10**, **Wazuh OVA**, **Ubuntu Live Server**, and **Kali Linux**) are bound to a unified VirtualBox **NAT Network** (`192.168.1.0/24`) as their primary interface.
+
+![network.png](/screenshots/network.png)
+![create.png](/screenshots/create.png)
+![socnetwork.png](/screenshots/network.png)
+![adapter1.png](/screenshots/adapter1.png)
+
 
 To enable seamless administration of the web services hosted on the Ubuntu node (n8n and IRIS DFIR) directly from the physical host machine's web browser, a secondary **Host-Only Adapter** is attached to the Ubuntu VM.
 
