@@ -315,7 +315,25 @@ And:
 ````powershell
 NET START Wazuh
 ````
-Wazuh is now successfully deployed on the endpoint.
+
+Next we will configure Wazuh to Collect Sysmon Logs.
+On Windows 10, edit the Wazuh agent config:
+```bash
+C:\Program Files (x86)\ossec-agent\ossec.conf
+```
+Add inside <ossec_config>:
+```xml
+<localfile>
+  <location>Microsoft-Windows-Sysmon/Operational</location>
+  <log_format>eventchannel</log_format>
+</localfile>
+```
+Restart agent:
+```powershell
+NET STOP WazuhSvc
+NET START WazuhSvc
+```
+Wazuh is now successfully deployed on the Windows 10 endpoint.
 
 ### 6.3 Advanced Threat Modeling Expansion
 Incorporate specialized SOCFortress alerting maps directly into the core Wazuh engine infrastructure:
@@ -363,7 +381,7 @@ docker compose up
 ```
 
 ### 6.5 Alert Routing Configuration
-To route events out of the Wazuh engine directly into the automated SOAR pipeline, edit `/var/ossec/etc/ossec.conf` and add a new integration block:
+To route events out of the Wazuh engine directly into the automated SOAR pipeline, edit `/var/ossec/etc/ossec.conf` (Wazuh OVA) and add a new integration block:
 ```xml
   <integration>
     <name>shuffle</name>
