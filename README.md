@@ -409,7 +409,7 @@ To establish communication across the laboratory topology, all virtual machines 
 
 ![network.png](/screenshots/network.png)
 ![create.png](/screenshots/create.png)
-![socnetwork.png](/screenshots/network.png)
+![socnetwork.png](/screenshots/socnetwork.png)
 ![adapter1.png](/screenshots/adapter1.png)
 
 
