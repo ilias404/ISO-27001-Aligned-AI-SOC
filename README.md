@@ -414,6 +414,10 @@ To establish communication across the laboratory topology, all virtual machines 
 
 
 To enable seamless administration of the web services hosted on the Ubuntu node (n8n and IRIS DFIR) directly from the physical host machine's web browser, a secondary **Host-Only Adapter** is attached to the Ubuntu VM.
+![hostonly.png](/screenshots/hostonly.png)
+![hostonlyadapter.png](/screenshots/hostonlyadapter.png)
+![adapter2.png](/screenshots/adapter2.png)
+
 
 #### Step-by-Step Ubuntu Netplan Setup
 
