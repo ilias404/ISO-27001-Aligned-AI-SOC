@@ -18,7 +18,7 @@
 4. [The SOAR Pipeline (n8n Workflow)](#4-the-soar-pipeline-n8n-workflow)
 5. [ISO 27001 / 27005 Compliance Mapping](#5-iso-27001--27005-compliance-mapping)
 6. [Installation & Deployment Guide](#6-installation--deployment-guide)
-7. [Attack Simulations & Results](#7-workflows)
+7. [Workflows](#7-workflows)
 8. [Attack Simulations & Results](#8-attack-simulations--results)
 9. [Challenges & Engineering Solutions](#9-challenges--engineering-solutions)
 10. [Results, Metrics & Conclusion](#10-results-metrics--conclusion)
