@@ -1,4 +1,4 @@
-🛡️ AI-Augmented SOC Lab: ISO 27001/27005 Aligned
+# 🛡️ AI-Augmented SOC Lab: ISO 27001/27005 Aligned
 
 > **Design and Implementation of an Automated Security Operations Center**
 
