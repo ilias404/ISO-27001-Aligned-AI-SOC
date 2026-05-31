@@ -403,6 +403,41 @@ Restart the Wazuh manager instance to apply the changes:
 sudo systemctl restart wazuh-manager
 ```
 
+### 6.6 Networking Configuration
+
+To establish communication across the laboratory topology, all virtual machines (**Windows 10**, **Wazuh OVA**, **Ubuntu SOC**, and **Kali Linux**) are bound to a unified VirtualBox **NAT Network** (`192.168.1.0/24`) as their primary interface. 
+
+To enable seamless administration of the web services hosted on the Ubuntu node (n8n and IRIS DFIR) directly from the physical host machine's web browser, a secondary **Host-Only Adapter** is attached to the Ubuntu VM.
+
+#### Step-by-Step Ubuntu Netplan Setup
+
+1. Open the Netplan configuration file on the Ubuntu SOC VM:
+   ```bash
+   sudo nano /etc/netplan/00-installer-config.yaml
+   ```
+2. Replace the existing configuration with the following layout to assign a static IP (192.168.56.20) to the secondary interface (enp0s8):
+
+```yaml
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp0s3:
+      dhcp4: true
+    enp0s8:
+      dhcp4: no
+      addresses:
+        - 192.168.56.20/24
+  version: 2
+```
+3. Save the file and apply the changes:
+
+```bash
+sudo netplan apply
+```
+The Ubuntu SOC services are now securely accessible from your host machine via http://192.168.56.20:5678 (n8n) and https://192.168.56.20 (IRIS DFIR), while keeping all simulated attack traffic isolated within the NAT network.
+
+
+
 ---
 
 ## 7. Attack Simulations & Results
