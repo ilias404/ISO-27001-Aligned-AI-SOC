@@ -376,6 +376,7 @@ git checkout v2.4.20
 cp .env.model .env
 docker compose pull
 docker compose up
+sudo systemctl enable docker
 ```
 
 ### 6.5 Alert Routing Configuration
