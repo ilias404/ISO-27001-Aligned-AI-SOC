@@ -57,10 +57,10 @@ All nodes interface across a host-isolated VirtualBox NAT Network subnet (`192.1
 
 | Virtual Machine | Operating System | NAT Network IP | Host-Only IP | RAM | Disk |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Wazuh** | Amazon Linux (OVA) | `192.168.1.3` | *N/A* | `8 GB` | `25 GB` |
+| **Wazuh** | Amazon Linux (OVA) | `192.168.1.3` | *-* | `8 GB` | `25 GB` |
 | **Ubuntu SOC** | Ubuntu 22.04 LTS | `192.168.1.4` | `192.168.56.20` | `4 GB` | `30 GB` |
 | **Windows 10** | Windows 10 Pro | `192.168.1.5` | `192.168.56.10` | `6 GB` | `30 GB` |
-| **Kali Linux** | Kali Linux | `192.168.1.6` | *N/A* | *N/A* | *N/A* |
+| **Kali Linux** | Kali Linux | `192.168.1.6` | *-* | `2 GB` | `45 GB` |
 
 ### 2.3 Comprehensive Data Flow Architecture
 
