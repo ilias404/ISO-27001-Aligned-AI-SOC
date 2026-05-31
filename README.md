@@ -382,11 +382,11 @@ sudo systemctl enable docker
 
 To update the default administrator username and password for the IRIS DFIR platform, modify the environment configuration variables:
 
-1. Navigate to the IRIS deployment directory and open the configuration file:
-   ```bash
-   cd iris-web
-   nano .env
-   ```
+Navigate to the IRIS deployment directory and open the configuration file:
+```bash
+cd iris-web
+nano .env
+```
 Locate and modify the following environment variables with your preferred credentials:
 
 ```
