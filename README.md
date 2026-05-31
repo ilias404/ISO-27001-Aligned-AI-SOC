@@ -334,13 +334,12 @@ docker compose up
 ### 6.5 Alert Routing Configuration
 To route events out of the Wazuh engine directly into the automated SOAR pipeline, edit `/var/ossec/etc/ossec.conf` and add a new integration block:
 ```xml
-<integration>
-  <name>shuffle</name>
-  <hook_url>[http://192.168.1.4:5678/webhook/wazuh](http://192.168.1.4:5678/webhook/wazuh)</hook_url>
-  <level>5</level>
-  <alert_format>json</alert_format>
-  <agent_id>001</agent_id>
-</integration>
+  <integration>
+    <name>shuffle</name>
+    <hook_url>http://192.168.56.20:5678/webhook/wazuh</hook_url>
+    <level>5</level>
+    <alert_format>json</alert_format>
+  </integration>
 ```
 
 Open the integrations script located at `/var/ossec/integrations/shuffle.py` and modify the outbound payload execution block to ignore certificate errors across the internal laboratory subnet:
