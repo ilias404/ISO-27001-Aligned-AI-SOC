@@ -275,7 +275,38 @@ Follow this step-by-step setup guide to provision the complete security operatio
 
 ![importappliance.png](/screenshots/importappliance.png)
 
-### 6.2 Endpoint Agent Deployment
+### 6.2 Windows 10 Sysmon & Agent Deployment
+
+Let's download and configure sysmon on our Windows 10 virtual machine.
+
+> **Sysmon (System Monitor)** is a Windows system service and device driver that logs system activity to the Windows Event Log. It's part of the Microsoft Sysinternals Suite and is widely used for advanced event logging.
+
+We’ll install it and configure it using **Olaf Hartong’s `sysmonconfig.xml`**, a community-trusted configuration.
+
+### Step 1: Download Sysmon
+
+1. Visit the official [Microsoft Sysinternals Sysmon page](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+2. Download **Sysmon for Windows**
+3. Extract the zip contents
+
+### Step 2: Download Olaf’s Sysmon Config
+
+1. Visit Olaf’s GitHub repo: [https://github.com/olafhartong/sysmon-modular](https://github.com/olafhartong/sysmon-modular)
+2. Download the `sysmonconfig.xml` file to the directory where Sysmon is downloaded.
+
+### Step 3: Install and Configure Sysmon
+
+Open a **Powershell as Administrator** and navigate to the folder where `Sysmon64.exe` and `sysmonconfig.xml` are located.
+
+Then run:
+
+```cmd
+.\Sysmon64.exe -i sysmonconfig.xml
+```
+Once installed, our Sysmon service should be ready to use. We can now ingest the Sysmon logs into our Wazuh server.
+
+
+
 Now, on the Windows 10 machine, open an Administrator Powershell and deploy the Wazuh agent using the following instructions:
 ```powershell
 Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.4-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='192.168.1.3' WAZUH_AGENT_NAME='demo' 
