@@ -138,17 +138,17 @@ The [Incident Response Information System (IRIS)](https://docs.dfir-iris.org/lat
 ---
 
 
-## 6. Installation & Deployment Guide
+## 4. Installation & Deployment Guide
 
 Follow this step-by-step setup guide to provision the complete security operations center laboratory topology.
 
-### 6.1 SIEM Infrastructure Deployment
+### 4.1 SIEM Infrastructure Deployment
 1. Download the deployment virtual engine footprint package for **Wazuh 4.14.4** directly from [here](https://documentation.wazuh.com/current/deployment-options/virtual-machine/virtual-machine.html).
 2. Open VirtualBox and use the **Import Appliance** feature to load the OVA package file.
 
 ![importappliance.png](/screenshots/importappliance.png)
 
-### 6.2 Windows 10 Agent Deployment & Sysmon
+### 4.2 Windows 10 Agent Deployment & Sysmon
 
 On the Windows 10 machine, open an Administrator Powershell and deploy the Wazuh agent using the following instructions:
 ```powershell
@@ -206,14 +206,14 @@ NET START WazuhSvc
 ```
 Wazuh is now successfully deployed on the Windows 10 endpoint.
 
-### 6.3 Advanced Threat Modeling Expansion (SOCFortress)
+### 4.3 Advanced Threat Modeling Expansion (SOCFortress)
 Incorporate specialized [SOCFortress](https://github.com/socfortress/Wazuh-Rules) alerting maps directly into the core Wazuh engine infrastructure:
 ```bash
 sudo su
 curl -so ~/wazuh_socfortress_rules.sh https://raw.githubusercontent.com/socfortress/Wazuh-Rules/main/wazuh_socfortress_rules.sh && bash ~/wazuh_socfortress_rules.sh
 ```
 
-### 6.4 Core Orchestration Stack Provisioning (n8n + DFIR IRIS)
+### 4.4 Core Orchestration Stack Provisioning (n8n + DFIR IRIS)
 On the dedicated Ubuntu Live Server infrastructure node, install the Docker and Docker Compose runtimes, then spin up the containerized stack:
 
 ```bash
@@ -271,7 +271,7 @@ Restart the Docker containers to apply the new credentials:
 docker compose down && docker compose up -d
 ```
 
-### 6.5 Alert Routing Configuration
+### 4.5 Alert Routing Configuration
 To route events out of the Wazuh engine directly into the automated SOAR pipeline, edit `/var/ossec/etc/ossec.conf` (Wazuh OVA) and add a new integration block:
 ```xml
   <integration>
@@ -295,7 +295,7 @@ Restart the Wazuh manager instance to apply the changes:
 sudo systemctl restart wazuh-manager
 ```
 
-### 6.6 Networking Configuration
+### 4.6 Networking Configuration
 
 To establish communication across the laboratory topology, all virtual machines (**Windows 10**, **Wazuh OVA**, **Ubuntu Live Server**, and **Kali Linux**) are bound to a unified VirtualBox **NAT Network** (`192.168.1.0/24`) as their primary interface.
 
