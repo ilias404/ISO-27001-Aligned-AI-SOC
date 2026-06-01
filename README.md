@@ -15,9 +15,9 @@
 1. [Introduction](#1-introduction)
 2. [Architecture & Network Topology](#2-architecture--network-topology)
 3. [Technology Stack](#3-technology-stack)
-4. [The SOAR Pipeline (n8n Workflow)](#4-the-soar-pipeline-n8n-workflow)
+4. [Installation & Deployment Guide](#4-installation--deployment-guide)
 5. [ISO 27001 / 27005 Compliance Mapping](#5-iso-27001--27005-compliance-mapping)
-6. [Installation & Deployment Guide](#6-installation--deployment-guide)
+
 7. [Workflows](#7-workflows)
 8. [Attack Simulations & Results](#8-attack-simulations--results)
 9. [Challenges & Engineering Solutions](#9-challenges--engineering-solutions)
