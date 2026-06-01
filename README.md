@@ -138,51 +138,6 @@ The [Incident Response Information System (IRIS)](https://docs.dfir-iris.org/lat
 ---
 
 
-## 5. ISO 27001 / 27005 Compliance Mapping
-
-This lab is built to support compliance frameworks by acting as a technical control point that enforces and documents security operations.
-
-### 5.1 ISO 27001:2022 Annex A Control Mapping
-
-| Annex A Control ID | Formal Requirement Statement | Direct Technical Laboratory Implementation Strategy |
-| :--- | :--- | :--- |
-| **A.5.24** | Information security incident management planning and preparation | n8n JSON playbooks automate standard incident paths, enforcing reliable, repeatable workflows. |
-| **A.5.25** | Assessment of and decision on information security events | Groq AI parses events against a uniform playbook prompt to classify risks without analyst bias. |
-| **A.5.26** | Response to information security incidents | The n8n engine automatically opens and populates cases inside the IRIS framework. |
-| **A.5.28** | Collection of evidence | IRIS stores immutable incident logs, hashes, and API analysis outputs for forensic retention. |
-| **A.8.15** | Logging | Sysmon and Windows Event logs capture granular host activity, sent over TLS to Wazuh. |
-| **A.8.16** | Monitoring activities | The Wazuh Dashboard displays continuous, real-time event correlation and security metrics. |
-| **A.8.20** | Network security | VirtualBox NAT networks logically isolate production systems from simulation environments. |
-
-### 5.2 ISO 27005 Risk Management Framework Integration
-
-```text
-┌────────────────────────────────────────────────────────────────────────────┐
-│                    1. RISK IDENTIFICATION (ISO 27005)                      │
-│       Wazuh Log Interception + Sysmon Engine + SOCFortress Schemas         │
-└─────────────────────────────────────┬──────────────────────────────────────┘
-                                      │
-                                      ▼
-┌────────────────────────────────────────────────────────────────────────────┐
-│                       2. RISK ANALYSIS (ISO 27005)                         │
-│  Parallel Enrichment (AbuseIPDB / VirusTotal) + Groq Context Evaluation    │
-└─────────────────────────────────────┬──────────────────────────────────────┘
-                                      │
-                                      ▼
-┌────────────────────────────────────────────────────────────────────────────┐
-│                      3. RISK EVALUATION (ISO 27005)                        │
-│  Groq Generates Dynamic Risk Score (0-100) & Formats MITRE Classifications │
-└─────────────────────────────────────┬──────────────────────────────────────┘
-                                      │
-                                      ▼
-┌────────────────────────────────────────────────────────────────────────────┐
-│                      4. RISK TREATMENT (ISO 27005)                         │
-│      Auto-Case Creation (IRIS) + Critical Triage Alerts via Telegram       │
-└────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
 ## 6. Installation & Deployment Guide
 
 Follow this step-by-step setup guide to provision the complete security operations center laboratory topology.
@@ -491,6 +446,51 @@ Authenticates against the IRIS API via Bearer tokens. Instantly creates a struct
 
 #### Node 10: Telegram Incident Response Bot
 Formats high-severity alert metrics into clean, structured Markdown text and pushes it to an active Telegram broadcast group chat for immediate mobile notification.
+
+---
+
+## 5. ISO 27001 / 27005 Compliance Mapping
+
+This lab is built to support compliance frameworks by acting as a technical control point that enforces and documents security operations.
+
+### 5.1 ISO 27001:2022 Annex A Control Mapping
+
+| Annex A Control ID | Formal Requirement Statement | Direct Technical Laboratory Implementation Strategy |
+| :--- | :--- | :--- |
+| **A.5.24** | Information security incident management planning and preparation | n8n JSON playbooks automate standard incident paths, enforcing reliable, repeatable workflows. |
+| **A.5.25** | Assessment of and decision on information security events | Groq AI parses events against a uniform playbook prompt to classify risks without analyst bias. |
+| **A.5.26** | Response to information security incidents | The n8n engine automatically opens and populates cases inside the IRIS framework. |
+| **A.5.28** | Collection of evidence | IRIS stores immutable incident logs, hashes, and API analysis outputs for forensic retention. |
+| **A.8.15** | Logging | Sysmon and Windows Event logs capture granular host activity, sent over TLS to Wazuh. |
+| **A.8.16** | Monitoring activities | The Wazuh Dashboard displays continuous, real-time event correlation and security metrics. |
+| **A.8.20** | Network security | VirtualBox NAT networks logically isolate production systems from simulation environments. |
+
+### 5.2 ISO 27005 Risk Management Framework Integration
+
+```text
+┌────────────────────────────────────────────────────────────────────────────┐
+│                    1. RISK IDENTIFICATION (ISO 27005)                      │
+│       Wazuh Log Interception + Sysmon Engine + SOCFortress Schemas         │
+└─────────────────────────────────────┬──────────────────────────────────────┘
+                                      │
+                                      ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│                       2. RISK ANALYSIS (ISO 27005)                         │
+│  Parallel Enrichment (AbuseIPDB / VirusTotal) + Groq Context Evaluation    │
+└─────────────────────────────────────┬──────────────────────────────────────┘
+                                      │
+                                      ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│                      3. RISK EVALUATION (ISO 27005)                        │
+│  Groq Generates Dynamic Risk Score (0-100) & Formats MITRE Classifications │
+└─────────────────────────────────────┬──────────────────────────────────────┘
+                                      │
+                                      ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│                      4. RISK TREATMENT (ISO 27005)                         │
+│      Auto-Case Creation (IRIS) + Critical Triage Alerts via Telegram       │
+└────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
