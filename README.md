@@ -17,12 +17,12 @@
 3. [Technology Stack](#3-technology-stack)
 4. [Installation & Deployment Guide](#4-installation--deployment-guide)
 5. [SOAR Pipeline (n8n workflow)](#5-soar-pipeline-n8n-workflow)
-6. [ISO 27001 / 27005 Compliance Mapping](#5-iso-27001--27005-compliance-mapping)
-7. 
-8. [Attack Simulations & Results](#8-attack-simulations--results)
-9. [Challenges & Engineering Solutions](#9-challenges--engineering-solutions)
-10. [Results, Metrics & Conclusion](#10-results-metrics--conclusion)
-11. [Appendices & References](#11-appendices--references)
+6. [ISO 27001 / 27005 Compliance Mapping](#6-iso-27001--27005-compliance-mapping)
+7. [Attack Simulations & Results](#7-attack-simulations--results)
+8. [Challenges & Engineering Solutions](#8-challenges--engineering-solutions)
+9. [Results, Metrics & Conclusion](#9-results-metrics--conclusion)
+10. [Appendices & References](#10-appendices--references)
+
 
 ---
 
