@@ -16,9 +16,9 @@
 2. [Architecture & Network Topology](#2-architecture--network-topology)
 3. [Technology Stack](#3-technology-stack)
 4. [Installation & Deployment Guide](#4-installation--deployment-guide)
-5. [ISO 27001 / 27005 Compliance Mapping](#5-iso-27001--27005-compliance-mapping)
-
-7. [Workflows](#7-workflows)
+5. [SOAR Pipeline (n8n workflow)](#7-soar-pipeline-(n8n-workflow))
+6. [ISO 27001 / 27005 Compliance Mapping](#5-iso-27001--27005-compliance-mapping)
+7. 
 8. [Attack Simulations & Results](#8-attack-simulations--results)
 9. [Challenges & Engineering Solutions](#9-challenges--engineering-solutions)
 10. [Results, Metrics & Conclusion](#10-results-metrics--conclusion)
@@ -341,7 +341,7 @@ The Ubuntu Live Server services are now securely accessible from the host machin
 
 ---
 
-## 5. Workflows
+## 5. SOAR Pipeline (n8n workflow)
 
 The complete n8n automation workflow is available in [`n8n-workflow.json`](./n8n-workflow.json).
 
