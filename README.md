@@ -447,6 +447,22 @@ Authenticates against the IRIS API via Bearer tokens. Instantly creates a struct
 #### Node 10: Telegram Incident Response Bot
 Formats high-severity alert metrics into clean, structured Markdown text and pushes it to an active Telegram broadcast group chat for immediate mobile notification.
 
+##### Setup
+
+###### Step 1 — Create a Telegram Bot
+1. Open Telegram → search **@BotFather**
+2. Send `/newbot` → choose a name and username
+3. Copy the **API token** generated
+
+###### Step 2 — Get Your Chat ID
+1. Search **@userinfobot** on Telegram
+2. Send any message → it replies with your **Chat ID**
+
+###### Step 3 — Configure in n8n
+In the **Alert Notification via Telegram** node:
+- Add a new Telegram credential with your **Bot API Token**
+- Set **Chat ID** to your personal chat ID
+
 ---
 
 ## 6. ISO 27001 / 27005 Compliance Mapping
