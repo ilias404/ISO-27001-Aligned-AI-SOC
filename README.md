@@ -508,8 +508,6 @@ This lab is built to support compliance frameworks by acting as a technical cont
 
 ---
 
----
-
 ## 7. Attack Simulations & Results
 
 ### 7.1 Attack Scenario 1: Malicious Binary Execution (Process Creation Pathway)
