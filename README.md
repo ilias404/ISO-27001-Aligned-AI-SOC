@@ -512,38 +512,6 @@ This lab is built to support compliance frameworks by acting as a technical cont
 
 ## 7. Attack Simulations & Results
 
-To evaluate the lab's defensive response capabilities, five separate attack scenarios were executed from the Kali Linux asset.
-
-### 7.1 Scenario A: Credential Dumping Drop (Mimikatz Footprint)
-* **Adversary Action Matrix:** Dropped an active execution mock of the Mimikatz code engine onto the desktop folder layout.
-* **Telemetry Output:** Sysmon Event ID 11 detected the new file addition, triggering internal rule ID `100092` at severity Level 13.
-* **Automated Playbook Path:** The SOAR workflow routed the file's SHA256 signature to VirusTotal. VirusTotal flagged the file as highly malicious (e.g., 58/72 detections), which Groq AI used to verify the attack threat vector.
-
-### 7.2 Scenario B: Obfuscated Execution (Encoded PowerShell Profile)
-* **Adversary Action Matrix:** Executed an obfuscated script payload using Base64 encoding parameters to bypass standard string filtering:
-```powershell
-  powershell.exe -enc ZQBjAGgAbwAg"SGFja2VkIEJ5IEthbGki"
-  ```
-* **Telemetry Output:** Sysmon Event ID 1 logged the process creation and captured the command-line arguments, triggering alert ID `100091` at Level 12.
-* **Automated Playbook Path:** The n8n script extracted the suspicious string payload. Groq AI decoded the command, mapped the activity to MITRE ATT&CK technique **T1059.001 (PowerShell)**, and opened an exploitation incident file.
-
-### 7.3 Scenario C: Domain Footprint Discovery (Target Subnet Scanning)
-* **Adversary Action Matrix:** Ran an intensive target port scan from the Kali Linux system targeting all open communication sockets on the Windows asset:
-```bash
-  nmap -sS -A -p- 192.168.1.5
-  ```
-* **Telemetry Output:** Sysmon Event ID 3 logged multiple rapid inbound socket connections, which triggered a high-volume network warning block at Level 10.
-* **Automated Playbook Path:** The SOAR engine parsed the attacking host IP (`192.168.1.6`) against AbuseIPDB. Because it was a local private address, the lookup returned a 0% public abuse score, but Groq AI's logic correctly identified the high-frequency internal scanning behavior and escalated the threat.
-
-### 7.4 Summary Attack Validation Matrix
-
-| Exploitation Target | Offensive Mechanism | Captured Event ID | Target MITRE Technique | Applied Severity Level | Response Action Taken |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Credential Access** | `mimikatz.exe` file drop | Sysmon ID 11 | T1036 (Masquerading) | Level 13 | Dynamic Case opened in IRIS with full threat intel summary. |
-| **Execution Exploitation** | Encoded PowerShell command string | Sysmon ID 1 | T1059.001 (PowerShell Scripting) | Level 12 | Critical Escalation notification pushed to Telegram channels. |
-| **Reconnaissance Activity** | High-volume `nmap` network port scan | Sysmon ID 3 | T1046 (Network Service Discovery) | Level 10 | Context stitched, logged into tracking metrics dashboards. |
-| **Persistence Establishment** | Unauthorized local administrator user creation | Win Security 4720 | T1136.001 (Local Account Creation) | Level 9 | Standard Case files opened, timeline documentation generated. |
-| **Command & Control** | Automated web interaction download cradle | Sysmon ID 1 / 3 | T1059.001 (Scripting Execution Paths) | Level 11 | Critical alert dispatched via Telegram, full case generated. |
 
 ---
 
