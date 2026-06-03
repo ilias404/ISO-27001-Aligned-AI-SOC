@@ -512,6 +512,73 @@ This lab is built to support compliance frameworks by acting as a technical cont
 
 ## 7. Attack Simulations & Results
 
+### 7.1 Attack Scenario 1: Malicious Binary Execution (Process Creation Pathway)
+
+* **Objective:** Validate that the execution of a malicious security evaluation tool triggers Sysmon Event ID 1 (Process Creation), ensure the log is ingested and decoded by the Wazuh manager, and verify that the n8n pipeline orchestrates automated threat triage, scoring, and incident case creation.
+* **Target Endpoint:** Windows 10 Workstation (`demo` Agent).
+* **Defensive Gateway:** Wazuh SIEM (`192.168.1.3`) & Ubuntu SOC (`192.168.1.4` / `192.168.56.20`).
+
+---
+
+#### Phase 1: Execution & Adversary Simulation
+To simulate a credential-dumping or privilege-escalation attempt, a compiled binary copy of `mimikatz.exe` was manually downloaded and executed on the `demo` Windows 10 endpoint workstation.
+
+---
+
+#### Phase 2: SIEM Detection (Wazuh & Sysmon)
+Immediately upon binary execution, the **Sysmon subsystem captures Event ID 1 (Process Creation)**, recording the complete process lineage, executing user context, command-line arguments, and process hashes. 
+
+The local Wazuh agent forwards this telemetry upstream to the manager. The **SOCFortress rules engine** matches the string parameters of the executing binary, instantly triggering an alert flagged with MITRE ATT&CK mapping **T1036 (Masquerading)** and **Defense Evasion** tactics.
+
+![mimikatzwazuh.png](/screenshots/mimikatzwazuh.png)
+
+---
+
+#### Phase 3: SOAR Pipeline Execution (n8n Automation)
+The alert payload is pushed via HTTP POST from Wazuh directly into the n8n webhook infrastructure path (`/webhook/wazuh`):
+
+1. **Extract Indicators Node:** Processes the incoming event frame, extracting the process identity, system details, and any associated cryptographic hashes from the Sysmon event structure.
+2. **Has Hash? Conditional Node:** Evaluates whether binary file signatures are available for parallel third-party threat intelligence lookup before handing off execution data to the core AI tier.
+3. **Groq AI Playbook Analyzer:** Evaluates the consolidated security data against a multi-point risk playbook prompt to categorize threats and calculate an immutable risk profile.
+
+> 📸 **SCREENSHOT PLACEHOLDER 2**
+> *Capture a screenshot of your n8n workflow canvas following execution. Verify the active trace pathing illuminated green tick marks all the way through "Extract Indicators", the conditional routing nodes, and into the Groq AI analyzer.*
+> 
+![n8n SOAR Workflow - Mimikatz Execution Pathway](./screenshots/2-n8n-mimikatz-pathway.png)
+
+---
+
+#### Phase 4: AI Triage & Case Generation (Groq, IRIS & Telegram)
+Following analysis by the **Groq LLaMA 3.1 Inference engine**, the automated pipeline executes incident creation and team alerts based on the derived metrics:
+
+* **Incident Platform Integration:** The workflow interacts with the IRIS DFIR platform REST API (`/manage/cases/add`) to provision a dedicated investigation file. The case is assigned with **Severity ID: 4 (High)**, reflecting the critical operational risk posed by credential theft tools.
+* **Mobile/Desktop Escalation:** The platform formats the structured analytical metrics into Markdown and transmits an instantaneous alert through the Telegram bot channel to notify the defensive security team.
+
+##### Real-Time Pipeline Output Result
+```text
+ALERT ID: 1780509586.3811881
+THREAT CLASSIFICATION: Possible Malware Communication
+RISK SCORE: 75
+RISK LEVEL: High
+CONFIDENCE LEVEL: High
+
+MITRE ATT&CK MAPPING: 
+Tactic: Defense Evasion
+Technique ID: T1036
+Technique Name: Masquerading
+
+ANALYSIS REASONING:
+The alert indicates a potential malware communication by the execution of mimikatz.exe, a tool for privilege escalation and password hash extraction. The malware was created by a process with a high integrity level, suggesting its execution was likely not prevented by system security controls. The repeated activity (7 times) within a short time window indicates potential malicious activity.
+
+RECOMMENDED ACTIONS: 
+1. Isolate the host to prevent further malicious activity.
+2. Enrich with threat intelligence to confirm the malware's behavior and identify potential attack vectors.
+3. Escalate to Tier 2 for further analysis and containment.
+
+ESCALATION REQUIRED: Yes
+
+EXECUTIVE SUMMARY:
+A suspicious process was detected, potentially indicating malicious activity. The host has been identified as a potential attack vector.
 
 ---
 
