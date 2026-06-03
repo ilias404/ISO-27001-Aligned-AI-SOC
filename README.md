@@ -526,7 +526,7 @@ Immediately upon binary execution, the **Sysmon subsystem captures Event ID 1 (P
 
 The local Wazuh agent forwards this telemetry upstream to the manager. The **SOCFortress rules engine** matches the string parameters of the executing binary, instantly triggering an alert flagged with MITRE ATT&CK mapping **T1036 (Masquerading)** and **Defense Evasion** tactics.
 
-![mimikatzwazuh.png](/screenshots/mimikatzwazuh.png)
+![mimikatzwazuh1.png](/screenshots/mimikatzwazuh1.png)
 
 #### Phase 3: SOAR Pipeline Execution (n8n Automation)
 The alert payload is pushed via HTTP POST from Wazuh directly into the n8n webhook infrastructure path (`/webhook/wazuh`):
