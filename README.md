@@ -519,6 +519,8 @@ This lab is built to support compliance frameworks by acting as a technical cont
 #### Phase 1: Execution & Adversary Simulation
 To simulate a credential-dumping or privilege-escalation attempt, a compiled binary copy of `mimikatz.exe` was manually downloaded and executed on the `demo` Windows 10 endpoint workstation.
 
+![mimikatz.png](/screenshots/mimikatz.png)
+
 #### Phase 2: SIEM Detection (Wazuh & Sysmon)
 Immediately upon binary execution, the **Sysmon subsystem captures Event ID 1 (Process Creation)**, recording the complete process lineage, executing user context, command-line arguments, and process hashes. 
 
