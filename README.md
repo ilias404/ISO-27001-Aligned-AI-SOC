@@ -518,12 +518,8 @@ This lab is built to support compliance frameworks by acting as a technical cont
 * **Target Endpoint:** Windows 10 Workstation (`demo` Agent).
 * **Defensive Gateway:** Wazuh SIEM (`192.168.1.3`) & Ubuntu SOC (`192.168.1.4` / `192.168.56.20`).
 
----
-
 #### Phase 1: Execution & Adversary Simulation
 To simulate a credential-dumping or privilege-escalation attempt, a compiled binary copy of `mimikatz.exe` was manually downloaded and executed on the `demo` Windows 10 endpoint workstation.
-
----
 
 #### Phase 2: SIEM Detection (Wazuh & Sysmon)
 Immediately upon binary execution, the **Sysmon subsystem captures Event ID 1 (Process Creation)**, recording the complete process lineage, executing user context, command-line arguments, and process hashes. 
@@ -531,8 +527,6 @@ Immediately upon binary execution, the **Sysmon subsystem captures Event ID 1 (P
 The local Wazuh agent forwards this telemetry upstream to the manager. The **SOCFortress rules engine** matches the string parameters of the executing binary, instantly triggering an alert flagged with MITRE ATT&CK mapping **T1036 (Masquerading)** and **Defense Evasion** tactics.
 
 ![mimikatzwazuh.png](/screenshots/mimikatzwazuh.png)
-
----
 
 #### Phase 3: SOAR Pipeline Execution (n8n Automation)
 The alert payload is pushed via HTTP POST from Wazuh directly into the n8n webhook infrastructure path (`/webhook/wazuh`):
