@@ -29,7 +29,7 @@
 ## 1. Introduction
 
 ### 1.1 Project Context
-This project was carried out as part of the Final Year Project (PFA). The objective was to design, implement, and document a production-grade Security Operations Center (SOC) laboratory that integrates artificial intelligence for automated alert triage. The entire architecture is built to align tightly with the ISO 27001 and ISO 27005 international standards.
+This project was carried out as part of my Final Year Project (PFA). The objective was to design, implement, and document a production-grade Security Operations Center (SOC) laboratory that integrates artificial intelligence for automated alert triage. The entire architecture is built to align tightly with the ISO 27001 and ISO 27005 international standards.
 
 ### 1.2 Objectives
 * **Open-Source Foundation:** Build a fully functional SOC lab using exclusively open-source tools.
@@ -369,8 +369,6 @@ Before using the workflow, replace the following placeholders:
 ![workflow.png](/screenshots/workflow.png)
 
 The comprehensive automated playbook sequence (`Wazuh-Optimal-Workflow`) systematically sanitizes and enriches raw indicators through ten stages:
-
-![workflow.png](/screenshots/workflow.png)
 
 ### 5.1 Step-by-Step Node Mechanics
 
