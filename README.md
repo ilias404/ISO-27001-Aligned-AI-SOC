@@ -536,46 +536,28 @@ The alert payload is pushed via HTTP POST from Wazuh directly into the n8n webho
 ![filehash.png](/screenshots/filehash.png)
 
 2. **Has Hash? Conditional Node:** Evaluates the extracted data and registers a `True` value because a binary file signature is present. It dynamically routes the payload down the file enrichment branch.
+
+![hashash.png](/screenshots/hashash.png)
+
+
 3. **VirusTotal Lookup API:** Calls the VirusTotal v3 REST API to retrieve real-time threat intelligence reputation scoring and scanning vectors for the extracted Mimikatz signature.
-4. **Groq AI Playbook Analyzer:** Receives the combined telemetry and VirusTotal intelligence data at the convergence node and evaluates the risk profile against a multi-point SOC playbook prompt.
 
 ![virustotalrep.png](/screenshots/virustotalrep.png)
 
-
----
+4. **Groq AI Playbook Analyzer:** Receives the combined telemetry and VirusTotal intelligence data at the convergence node and evaluates the risk profile against a multi-point SOC playbook prompt.
 
 #### Phase 4: AI Triage & Case Generation (Groq, IRIS & Telegram)
-Following analysis by the **Groq LLaMA 3.1 Inference engine**[cite: 2], the automated pipeline executes incident creation and team alerts based on the derived metrics:
+Following analysis by the **Groq LLaMA 3.1 Inference engine**, the automated pipeline executes incident creation and team alerts based on the derived metrics:
 
 * **Incident Platform Integration:** The workflow interacts with the IRIS DFIR platform REST API (`/manage/cases/add`) to provision a dedicated investigation file. The case is assigned with **Severity ID: 4 (High)**, reflecting the critical operational risk posed by credential theft tools.
+
+![iriskatz.png](/screenshots/iriskatz.png)
+
 * **Mobile/Desktop Escalation:** The platform formats the structured analytical metrics into Markdown and transmits an instantaneous alert through the Telegram bot channel to notify the defensive security team.
 
-##### Real-Time Pipeline Output Result
-```text
-ALERT ID: 1780509586.3811881
-THREAT CLASSIFICATION: Possible Malware Communication
-RISK SCORE: 75
-RISK LEVEL: High
-CONFIDENCE LEVEL: High
+![n8nteleg.png](/screenshots/n8nteleg.png)
 
-MITRE ATT&CK MAPPING: 
-Tactic: Defense Evasion
-Technique ID: T1036
-Technique Name: Masquerading
 
-ANALYSIS REASONING:
-The alert indicates a potential malware communication by the execution of mimikatz.exe, a tool for privilege escalation and password hash extraction. The malware was created by a process with a high integrity level, suggesting its execution was likely not prevented by system security controls. The repeated activity (7 times) within a short time window indicates potential malicious activity.
-
-RECOMMENDED ACTIONS: 
-1. Isolate the host to prevent further malicious activity.
-2. Enrich with threat intelligence to confirm the malware's behavior and identify potential attack vectors.
-3. Escalate to Tier 2 for further analysis and containment.
-
-ESCALATION REQUIRED: Yes
-
-EXECUTIVE SUMMARY:
-A suspicious process was detected, potentially indicating malicious activity. The host has been identified as a potential attack vector.
-```
 ---
 
 ## 8. Challenges & Engineering Solutions
