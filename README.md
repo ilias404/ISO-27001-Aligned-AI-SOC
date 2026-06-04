@@ -532,6 +532,9 @@ The local Wazuh agent forwards this telemetry upstream to the manager. The **SOC
 The alert payload is pushed via HTTP POST from Wazuh directly into the n8n webhook infrastructure path (`/webhook/wazuh`):
 
 1. **Extract Indicators Node:** Processes the incoming event frame, extracting the process identity, system details, and isolating the SHA256 cryptographic hash from the Sysmon telemetry structure.
+
+![filehash.png](/screenshots/filehash.png)
+
 2. **Has Hash? Conditional Node:** Evaluates the extracted data and registers a `True` value because a binary file signature is present. It dynamically routes the payload down the file enrichment branch.
 3. **VirusTotal Lookup API:** Calls the VirusTotal v3 REST API to retrieve real-time threat intelligence reputation scoring and scanning vectors for the extracted Mimikatz signature.
 4. **Groq AI Playbook Analyzer:** Receives the combined telemetry and VirusTotal intelligence data at the convergence node and evaluates the risk profile against a multi-point SOC playbook prompt.
