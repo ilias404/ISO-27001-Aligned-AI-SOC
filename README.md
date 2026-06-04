@@ -566,7 +566,7 @@ Following analysis by the **Groq LLaMA 3.1 Inference engine**, the automated pip
 #### Phase 1: Execution (Kali Linux)
 To map out open ports on the target network, an aggressive network service sweep was launched from the **Kali Linux VM** using `nmap`:
 
-![nmap.png](/screenshots/nmap.png)
+![nmapudp.png](/screenshots/nmapudp.png)
 
 This flooded the target machine with rapid UDP packets over a short time frame.
 
