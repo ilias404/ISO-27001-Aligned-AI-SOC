@@ -578,7 +578,7 @@ The Windows host-based firewall dropped the unauthorized inbound packets. Wazuh 
 #### Phase 3: Automation & Alerting (n8n SOAR)
 Wazuh forwarded the alert JSON data directly to the n8n webhook. The pipeline extracted the source IP and port data, then routed the context to the **Groq AI Node** to generate an automated incident response verdict.
 
-![n8ntelegnmap.png](/screenshots/n8ntelegnmap.png)
+![n8nnmapteleg.png](/screenshots/n8nnmapteleg.png)
 
 
 ## 8. Challenges & Engineering Solutions
