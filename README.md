@@ -551,7 +551,7 @@ Following analysis by the **Groq LLaMA 3.1 Inference engine**, the automated pip
 
 * **Incident Platform Integration:** The workflow interacts with the IRIS DFIR platform REST API (`/manage/cases/add`) to provision a dedicated investigation file. The case is assigned with **Severity ID: 4 (High)**, reflecting the critical operational risk posed by credential theft tools.
 
-![iriskatz.png](/screenshots/iriskatz.png)
+![iriskatzz.png](/screenshots/iriskazz.png)
 
 * **Mobile/Desktop Escalation:** The platform formats the structured analytical metrics into Markdown and transmits an instantaneous alert through the Telegram bot channel to notify the defensive security team.
 
