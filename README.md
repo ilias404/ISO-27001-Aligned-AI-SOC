@@ -557,8 +557,29 @@ Following analysis by the **Groq LLaMA 3.1 Inference engine**, the automated pip
 
 ![n8nteleg.png](/screenshots/n8nteleg.png)
 
+### 7.2 Attack Scenario 2: Network Reconnaissance via Active Scanning
 
----
+* **Objective:** Test if the SOAR pipeline catches an aggressive network scan from Kali.
+* **Target:** Windows 10 Workstation (`demo` Agent).
+* **Defensive Gateway:** Wazuh SIEM & n8n SOAR Engine.
+
+#### Phase 1: Execution (Kali Linux)
+To map out open ports on the target network, an aggressive network service sweep was launched from the **Kali Linux VM** using `nmap`:
+
+![nmap.png](/screenshots/nmap.png)
+
+This flooded the target machine with rapid UDP packets over a short time frame.
+
+#### Phase 2: Detection (Wazuh SIEM)
+The Windows host-based firewall dropped the unauthorized inbound packets. Wazuh intercepted these blocks, correlated the high volume of traffic from a single source, and triggered a **Level 10** alert:
+* **Rule ID:** `4151`
+* **Description:** Multiple Firewall drop events from same source.
+
+#### Phase 3: Automation & Alerting (n8n SOAR)
+Wazuh forwarded the alert JSON data directly to the n8n webhook. The pipeline extracted the source IP and port data, then routed the context to the **Groq AI Node** to generate an automated incident response verdict.
+
+![n8nnmap.png](/screenshots/n8nnmap.png)
+
 
 ## 8. Challenges & Engineering Solutions
 
