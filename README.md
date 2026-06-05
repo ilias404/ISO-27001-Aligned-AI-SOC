@@ -19,9 +19,8 @@
 5. [SOAR Pipeline (n8n workflow)](#5-soar-pipeline-n8n-workflow)
 6. [ISO 27001 / 27005 Compliance Mapping](#6-iso-27001--27005-compliance-mapping)
 7. [Attack Simulations & Results](#7-attack-simulations--results)
-8. [Challenges & Engineering Solutions](#8-challenges--engineering-solutions)
-9. [Results, Metrics & Conclusion](#9-results-metrics--conclusion)
-10. [Appendices & References](#10-appendices--references)
+8. [Results, Metrics & Conclusion](#8-results-metrics--conclusion)
+9. [Appendices & References](#9-appendices--references)
 
 
 ---
@@ -603,30 +602,11 @@ Upon matching the failure thresholds, the Wazuh Manager packaged the SSH event d
 
 ![telegnotif.png](/screenshots/telegnotif.png)
 
-
-## 8. Challenges & Engineering Solutions
-
-### 8.1 Overcoming Webhook SSL Verification Failures
-* **The Problem:** The default python integration framework inside the Wazuh manager engine (`shuffle.py`) systematically dropped out during data exchanges with n8n. This occurred because the internal script rejected the self-signed SSL certificate protecting the containerized n8n instance.
-* **The Engineering Solution:** Modified the Python runtime code within `/var/ossec/integrations/shuffle.py`. Added a targeted `verify=False` flag to the POST request execution parameters, allowing alert data to flow securely within the isolated lab environment.
-
-### 8.2 Eliminating Alert Fatigue via Intelligent Caching
-* **The Problem:** Running high-frequency, automated attack tools (such as Hydra password spraying or intensive Nmap port scans) generated hundreds of raw log entries every second. Passing each log entry individually through the SOAR workflow threatened to exhaust free API limits and flood the IRIS platform with duplicate cases.
-* **The Engineering Solution:** Built a JavaScript deduplication script directly ahead of the threat intelligence nodes. This custom node reads incoming source addresses and file signatures, storing them in a dynamic internal cache with a 5-minute time-to-live (TTL) window. Duplicate logs within this timeframe update the existing event metrics rather than triggering a new workflow.
-
-### 8.3 Resolving Resource Constraints via Cloud AI Interfacing
-* **The Problem:** The host hardware platform (16GB RAM) experienced severe performance drops when running a local LLM via Ollama alongside the four required virtual machines. Memory bottlenecks caused long processing delays, raising alert triage times to over 45 seconds per event.
-* **The Engineering Solution:** Replaced the local Ollama deployment with the high-speed cloud-based Groq API running `llama-3.1-8b-instant`. This change shifted the heavy processing load away from the host system, cutting the AI analysis window down to a sub-second response rate.
-
-### 8.4 Fixing JSON Expression Injections inside n8n Nodes
-* **The Problem:** When using raw JSON request fields in n8n's standard HTTP Request modules, input variables wrapped in `={{ ... }}` notation frequently failed to compile or broke the payload layout.
-* **The Engineering Solution:** Configured the target n8n nodes to handle data entries using individual input blocks rather than a single raw text payload, resolving code parsing errors.
-
 ---
 
-## 9. Results, Metrics & Conclusion
+## 8. Results, Metrics & Conclusion
 
-### 9.1 Analytical Metrics Performance Review
+### 8.1 Analytical Metrics Performance Review
 
 The automated AI-driven triage architecture achieved significant performance improvements across three key operational metrics:
 
@@ -644,14 +624,14 @@ Manual DFIR Case Logging:  ─────────────────�
 SOAR Dynamic Injection:   ───► 2.8 Seconds (Instant Provisioning)
 ```
 
-### 9.2 Final Review
+### 8.2 Final Review
 This project successfully demonstrates how an AI-augmented SOC laboratory can be deployed entirely using open-source tools. By integrating automated threat intelligence enrichment with an advanced LLM inference engine, the architecture eliminates typical manual bottleneck phases from the incident response lifecycle. 
 
 The resulting platform delivers fast, reliable, and reproducible threat monitoring that meets the standard operational requirements defined by the ISO 27001 and ISO 27005 frameworks.
 
 ---
 
-## 10. Appendices & References
+## 9. Appendices & References
 
 ### Appendix A: Complete Operational JSON n8n Blueprint Pipeline
 To replicate this pipeline, copy the complete configuration block below and paste it directly into your local n8n workflow canvas panel:
