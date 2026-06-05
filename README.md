@@ -580,6 +580,29 @@ Wazuh forwarded the alert JSON data directly to the n8n webhook. The pipeline ex
 
 ![n8nnmapteleg.png](/screenshots/n8nnmapteleg.png)
 
+# 7.3 Attack Scenario 3: External Brute-Force Access via SSH Remote Services
+
+* **Objective:** Test the SIEM/SOAR pipeline’s capability to detect, aggregate, and alert on automated credential-stuffing attacks targeting native Secure Shell (SSH) remote access protocols.
+* **Target:** Windows 10 Workstation (`demo` Agent).
+* **Defensive Gateway:** Wazuh SIEM & n8n SOAR Engine.
+
+### Phase 1: Execution (Kali Linux)
+Using the network auditing tool Hydra, an automated dictionary attack was launched from the Kali Linux testing machine specifically against the Windows 10 OpenSSH endpoint on port 22. This test simulated an adversary attempting to guess credentials for local accounts via SSH:
+
+![hydra.png](/screenshots/hydra.png)
+
+The attack generated rapid, consecutive SSH authentication failures before identifying the valid credential set.
+
+### Phase 2: Detection (Wazuh SIEM)
+The Windows Security subsystem generated a high volume of failed authentication logs as the brute-force script cycled through the dictionary file over the SSH connection. Wazuh intercepted the telemetry through the native event log parser:
+
+![webhook.png](/screenshots/webhook.png)
+
+### Phase 3: Automation & Alerting (n8n SOAR)
+Upon matching the failure thresholds, the Wazuh Manager packaged the SSH event data into a structured JSON payload and forwarded it via webhook to the n8n orchestration engine. The data pipeline successfully parsed the incoming security alert and generated an automated Telegram notification.
+
+![telegnotif.png](/screenshots/telegnotif.png)
+
 
 ## 8. Challenges & Engineering Solutions
 
