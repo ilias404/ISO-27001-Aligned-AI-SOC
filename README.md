@@ -158,7 +158,7 @@ And:
 NET START Wazuh
 ````
 
-Now, et's download and configure sysmon on our Windows 10 virtual machine.
+Now, let's download and configure sysmon on our Windows 10 virtual machine.
 
 > **Sysmon (System Monitor)** is a Windows system service and device driver that logs system activity to the Windows Event Log. It's part of the Microsoft Sysinternals Suite and is widely used for advanced event logging.
 
@@ -206,7 +206,7 @@ NET START WazuhSvc
 Wazuh is now successfully deployed on the Windows 10 endpoint.
 
 ### 4.3 Advanced Threat Modeling Expansion (SOCFortress)
-Incorporate specialized [SOCFortress](https://github.com/socfortress/Wazuh-Rules) alerting maps directly into the core Wazuh engine infrastructure:
+Incorporate specialized [SOCFortress](https://github.com/socfortress/Wazuh-Rules) detection rules directly into the core Wazuh engine infrastructure:
 ```bash
 sudo su
 curl -so ~/wazuh_socfortress_rules.sh https://raw.githubusercontent.com/socfortress/Wazuh-Rules/main/wazuh_socfortress_rules.sh && bash ~/wazuh_socfortress_rules.sh
