@@ -600,7 +600,7 @@ The Windows Security subsystem generated a high volume of failed authentication 
 ### Phase 3: Automation & Alerting (n8n SOAR)
 Upon matching the failure thresholds, the Wazuh Manager packaged the SSH event data into a structured JSON payload and forwarded it via webhook to the n8n orchestration engine. The data pipeline successfully parsed the incoming security alert and generated an automated Telegram notification.
 
-![telegnotif.png](/screenshots/telegnotif.png)
+![telegbruteforce.png](/screenshots/telegbruteforce.png)
 
 ---
 
