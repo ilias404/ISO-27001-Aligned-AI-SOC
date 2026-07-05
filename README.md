@@ -64,7 +64,7 @@ All nodes interface across a host-isolated VirtualBox NAT Network subnet (`192.1
 
 ### 2.3 Comprehensive Data Flow Architecture
 
-![globalarch.png](/screenshots/globalarch.png)
+![globalarchi.png](/screenshots/globalarchi.png)
 
 ## 3. Technology Stack
 
